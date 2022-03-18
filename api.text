@@ -1,0 +1,14 @@
+.../home ---> get request{
+    [
+        event details
+    ],
+    [
+        counting details
+    ],
+    [
+        package details
+    ],
+    [
+        blog details
+    ]
+}
