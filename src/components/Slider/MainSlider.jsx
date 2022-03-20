@@ -57,7 +57,7 @@ export default function MainSlider() {
                   <h2>{data.title}</h2>
                   <p>{data.text}</p>
                   <Link
-                    to="#"
+                    to="/donate"
                     data-target=".donate-options"
                     className="scroll-to-target thm-btn dynamic-radius"
                   >

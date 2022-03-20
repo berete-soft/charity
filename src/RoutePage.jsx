@@ -6,6 +6,8 @@ import Causes_Detail from "./components/Causes_Detail";
 import Contact from "./components/Contact";
 import Event from "./components/Event";
 import Event_Detail from "./components/Event_Detail";
+import DonationForm from "./components/form/DonationForm";
+import PaymentForm from "./components/form/PaymentForm";
 import RegistrationForm from "./components/form/RegistrationForm";
 import Home from "./components/Home";
 export default function RoutePage() {
@@ -21,6 +23,8 @@ export default function RoutePage() {
           <Route path="/causes_detail" element={<Causes_Detail />} />
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/registation" element={<RegistrationForm />}></Route>
+          <Route path="/donate" element={<DonationForm />}></Route>
+          <Route path="/payment" element={<PaymentForm />}></Route>
         </Routes>
       </Router>
     </div>
