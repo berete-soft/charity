@@ -2,6 +2,7 @@ import React from "react";
 // import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import Footer from "../layout/Footer";
+import Package from "../layout/Package";
 import Accordion from "./accordion/Accordion";
 import Header from "./header/Header";
 import BlogSlider from "./Slider/BlogSlider";
@@ -228,103 +229,27 @@ function Home() {
                 </div>
               </div>
               <div className="col-xl-7">
-                <div className="row">
-                  <div className="col-md-6">
-                    <div
-                      className="price-one__single wow flipInY"
-                      data-wow-duration="1500ms"
-                    >
-                      <i className="fa fa-paper-plane"></i>
-                      <p>Silver Package</p>
-                      <h3>$30.00</h3>
-                      <ul className="price-one__list">
-                        <li>Free text goes here</li>
-                        <li>Write here anything</li>
-                        <li>Above mention it</li>
-                        <li>Say once again</li>
-                      </ul>
-                      <Link to="#" className="thm-btn dynamic-radius">
-                        Choose Plan
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div
-                      className="price-one__single gold wow flipInY"
-                      data-wow-duration="1500ms"
-                    >
-                      <i className="fa fa-plane"></i>
-                      <p>Gold Package</p>
-                      <h3>$60.00</h3>
-                      <ul className="price-one__list">
-                        <li>Free text goes here</li>
-                        <li>Write here anything</li>
-                        <li>Above mention it</li>
-                        <li>Say once again</li>
-                      </ul>
-                      <Link to="#" className="thm-btn dynamic-radius">
-                        Choose Plan
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                <Package />
               </div>
             </div>
           </div>
         </section>
 
-        {/* <section className="event-home-two pb-120">
-          <div className="container">
-            <div className="row align-items-start align-items-md-center flex-column flex-md-row mb-60">
-              <div className="col-lg-7">
-                <div className="block-title">
-                  <p>
-                    <img
-                      src="assets/images/shapes/heart-2-1.png"
-                      width="15"
-                      alt=""
-                    />
-                    Latest Event List
-                  </p>
-                  <h3>Checkout our upcoming full event list.</h3>
-                </div>
-              </div>
-            </div>
-            <div className="event-grid">
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-            </div>
-          </div>
-        </section> */}
         <section className="news__top news-home  pt-120">
           <div className="container">
             <div className="row align-items-start align-items-md-center flex-column flex-md-row">
               <div className="col-lg-12">
-                <div className="block-title">
+                <div className="block-title pb-5">
                   <h3>Check our list of Events available for the Commutity</h3>
                 </div>
               </div>
             </div>
+
+            <BlogSlider />
           </div>
         </section>
 
         <div className="client-carousel client-carousel__has-border-top">
-          <section className="news-page pb-5">
-            <div className="container">
-              <BlogSlider />
-            </div>
-          </section>
-
           <div className="container pb-5">
             <div className="block-title">
               <h3>OUR VALUABLE SPONSORS</h3>

@@ -1,5 +1,7 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
+import Values from "../../Values";
 import CauseCard from "../Card/CauseCard";
 
 export default function CauseSlider() {
@@ -28,11 +30,22 @@ export default function CauseSlider() {
       },
     ],
   };
+
+  const url = `${Values.BASE_URL}cause_list`;
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((d) => {
+        setSlide(d.data.response);
+      })
+      .catch((e) => console.log(e));
+  }, []);
   return (
     <Slider {...settings}>
       {slide.map((data, i) => (
         <div key={i} className="cause-slide-wrapper">
-          <CauseCard />
+          <CauseCard data={data} />
         </div>
       ))}
     </Slider>

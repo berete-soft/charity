@@ -1,9 +1,25 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
+import Values from "../../Values";
 import BlogCard from "../Card/BlogCard";
 
 export default function BlogSlider() {
-  const [slide, setSlide] = useState([1, 1, 1, 1, 1]);
+  const [slide, setSlide] = useState([]);
+
+  const url = `${Values.BASE_URL}event_list`;
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((d) => {
+        setSlide(d.data.response);
+      })
+      .then((e) => {
+        console.log(e);
+      });
+  }, []);
+
   const settings = {
     dots: false,
     infinite: false,
@@ -32,7 +48,7 @@ export default function BlogSlider() {
     <Slider {...settings}>
       {slide.map((data, i) => (
         <div key={i} className="blog-slide-wrp">
-          <BlogCard />
+          <BlogCard data={data} />
         </div>
       ))}
     </Slider>

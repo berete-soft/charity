@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import icon1 from "../../assets/images/Icons/1st-Register.png";
 import icon2 from "../../assets/images/Icons/2nd-Charity.png";
 import icon3 from "../../assets/images/Icons/3rd-School.png";
+import Values from "../../Values";
 
 export default function ServiceSlider() {
   const [datas, setDatas] = useState([
@@ -29,6 +30,16 @@ export default function ServiceSlider() {
       bg: "background-base",
     },
   ]);
+
+  useEffect(() => {
+    const url = `${Values.BASE_URL}office_list`;
+    // axios
+    //   .get(url)
+    //   .then((d) => {
+    //     setDatas(d.data.response);
+    //   })
+    //   .catch((e) => console.log(e));
+  }, []);
   const settings = {
     dots: false,
     infinite: false,

@@ -1,0 +1,22 @@
+.news__top::before {
+  background-color: transparent;
+}
+a.cause-card__share {
+  display: inline-flex;
+}
+
+.cause-card__bottom_event {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-card__content {
+  padding: 1rem;
+}
+
+.price-one__list {
+  li {
+    line-height: 2rem;
+  }
+}
