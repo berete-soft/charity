@@ -6,7 +6,7 @@ import Values from "../../Values";
 
 export default function RegistrationForm() {
   const [date, setDate] = useState(new Date().toLocaleDateString("en-GB"));
-  const [membership, setMembership] = useState("");
+  // const [membership, setMembership] = useState("");
 
   //personal Information
   const [firstName, setFirstName] = useState("");
@@ -20,10 +20,10 @@ export default function RegistrationForm() {
   const [religion, setReligion] = useState("");
   const [residentState, setResidentState] = useState("");
   const [maritalState, setMaritalState] = useState("");
-  const [nationalID, setNationalID] = useState("");
-  const [drivingLicense, setDrivingLicense] = useState("");
-  const [tinNo, setTinNo] = useState("");
-  const [passportNo, setPassportNo] = useState("");
+  // const [nationalID, setNationalID] = useState("");
+  // const [drivingLicense, setDrivingLicense] = useState("");
+  // const [tinNo, setTinNo] = useState("");
+  // const [passportNo, setPassportNo] = useState("");
   const [profession, setProfession] = useState("");
 
   // conract Details
@@ -57,9 +57,9 @@ export default function RegistrationForm() {
     setDate(e.target.value);
   };
 
-  const membershipHandler = (e) => {
-    setMembership(e.target.value);
-  };
+  // const membershipHandler = (e) => {
+  //   setMembership(e.target.value);
+  // };
 
   // for personal Information
   const firstNameHandler = (e) => {
@@ -105,21 +105,21 @@ export default function RegistrationForm() {
     setMaritalState(e.target.value);
   };
 
-  const nationalIdHandler = (e) => {
-    setNationalID(e.target.value);
-  };
+  // const nationalIdHandler = (e) => {
+  //   setNationalID(e.target.value);
+  // };
 
-  const drivingLicenseHandler = (e) => {
-    setDrivingLicense(e.target.value);
-  };
+  // const drivingLicenseHandler = (e) => {
+  //   setDrivingLicense(e.target.value);
+  // };
 
-  const tinNoHandler = (e) => {
-    setTinNo(e.target.value);
-  };
+  // const tinNoHandler = (e) => {
+  //   setTinNo(e.target.value);
+  // };
 
-  const passportNoHandler = (e) => {
-    setPassportNo(e.target.value);
-  };
+  // const passportNoHandler = (e) => {
+  //   setPassportNo(e.target.value);
+  // };
 
   // for contact details
 
@@ -165,7 +165,7 @@ export default function RegistrationForm() {
       place_birth: birthPlace,
       father_name: fatherName,
       mother_name: motherName,
-      membership_type: membership,
+      // membership_type: membership,
       nationality,
       religion,
       resident_status: residentState,
@@ -225,14 +225,18 @@ export default function RegistrationForm() {
             className="registration"
           >
             <div className="registration-header">
+              <label htmlFor="date" className="date-label">
+                Date:
+              </label>
               <input
+                id="date"
                 type="text"
                 value={date}
                 placeholder="Date"
                 className="date"
                 onChange={(e) => dateHandler(e)}
               />
-              <div className="radio-wrp">
+              {/* <div className="radio-wrp">
                 <span>Membership Type</span>
                 <div className="radio-group">
                   <input
@@ -264,7 +268,7 @@ export default function RegistrationForm() {
                   />
                   <label htmlFor="vip">Vip</label>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="registration-personal">
               <div className="group-title">
@@ -287,8 +291,9 @@ export default function RegistrationForm() {
                 />
               </div>
               <div className="radio-wrp">
-                <span>Gender</span>
+                <span>Gender:</span>
                 <div className="radio-group">
+                  <label htmlFor="male">Male</label>
                   <input
                     type="radio"
                     name="gender"
@@ -296,9 +301,9 @@ export default function RegistrationForm() {
                     value="male"
                     onChange={(e) => genderHandler(e)}
                   />
-                  <label htmlFor="male">Male</label>
                 </div>
                 <div className="radio-group">
+                  <label htmlFor="female">Female</label>
                   <input
                     type="radio"
                     name="gender"
@@ -306,7 +311,6 @@ export default function RegistrationForm() {
                     value="female"
                     onChange={(e) => genderHandler(e)}
                   />
-                  <label htmlFor="female">Female</label>
                 </div>
               </div>
               <div className="input-grid">
@@ -359,8 +363,9 @@ export default function RegistrationForm() {
               </div>
 
               <div className="radio-wrp">
-                <span>Resident Status</span>
+                <span>Resident Status: </span>
                 <div className="radio-group">
+                  <label htmlFor="Resident">Resident</label>
                   <input
                     type="radio"
                     name="Resident-Status"
@@ -368,9 +373,9 @@ export default function RegistrationForm() {
                     value="resident"
                     onChange={(e) => residentStateHandler(e)}
                   />
-                  <label htmlFor="Resident">Resident</label>
                 </div>
                 <div className="radio-group">
+                  <label htmlFor="Non-Resident">Non-Resident</label>
                   <input
                     type="radio"
                     name="Resident-Status"
@@ -378,13 +383,13 @@ export default function RegistrationForm() {
                     value="non-resident"
                     onChange={(e) => residentStateHandler(e)}
                   />
-                  <label htmlFor="Non-Resident">Non-Resident</label>
                 </div>
               </div>
 
               <div className="radio-wrp">
-                <span>Marital Status</span>
+                <span>Marital Status:</span>
                 <div className="radio-group">
+                  <label htmlFor="Married">Married</label>
                   <input
                     type="radio"
                     name="marrital-status"
@@ -392,9 +397,9 @@ export default function RegistrationForm() {
                     value="married"
                     onChange={(e) => maritalStateHandler(e)}
                   />
-                  <label htmlFor="Married">Married</label>
                 </div>
                 <div className="radio-group">
+                  <label htmlFor="Unmarried">Unmarried</label>
                   <input
                     type="radio"
                     name="marrital-status"
@@ -402,11 +407,10 @@ export default function RegistrationForm() {
                     value="unmarried"
                     onChange={(e) => maritalStateHandler(e)}
                   />
-                  <label htmlFor="Unmarried">Unmarried</label>
                 </div>
               </div>
 
-              <div className="input-grid">
+              {/* <div className="input-grid">
                 <input
                   type="text"
                   name="name"
@@ -438,7 +442,7 @@ export default function RegistrationForm() {
                   value={passportNo}
                   onChange={(e) => passportNoHandler(e)}
                 />
-              </div>
+              </div> */}
               <div className="input-grid">
                 <input
                   type="text"
