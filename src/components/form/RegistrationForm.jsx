@@ -5,7 +5,7 @@ import logo from "../../assets/images/logo.png";
 import Values from "../../Values";
 
 export default function RegistrationForm() {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date().toLocaleDateString("en-GB"));
   const [membership, setMembership] = useState("");
 
   //personal Information
@@ -47,6 +47,8 @@ export default function RegistrationForm() {
       .catch((e) => {
         console.log(e);
       });
+
+    const date = new Date().toLocaleDateString("en-GB");
   }, []);
 
   // handler
