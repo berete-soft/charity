@@ -15,7 +15,7 @@ export default function BlogSlider() {
       .then((d) => {
         setSlide(d.data.response);
       })
-      .then((e) => {
+      .catch((e) => {
         console.log(e);
       });
   }, []);
