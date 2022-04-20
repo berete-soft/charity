@@ -20,3 +20,22 @@ a.cause-card__share {
     line-height: 2rem;
   }
 }
+
+select.selectpicker {
+  display: block !important;
+  background: transparent;
+  color: #fff;
+  border: none;
+
+  option {
+    color: #000;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}

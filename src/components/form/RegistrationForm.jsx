@@ -36,13 +36,15 @@ export default function RegistrationForm() {
   const [email, setEmail] = useState("");
 
   const [countryList, setCountryList] = useState([]);
+  const [data, setData] = useState({});
+  console.log(data);
 
   useEffect(() => {
-    const url = `${Values.BASE_URL}countries`;
+    const url = `${Values.BASE_URL}site_settings`;
     axios
       .get(url)
       .then((d) => {
-        setCountryList(d.data.response);
+        setData(d.data.response);
       })
       .catch((e) => {
         console.log(e);
@@ -195,21 +197,23 @@ export default function RegistrationForm() {
         <div className="container">
           <div className="registration-form-header-logo">
             <Link to="/">
-              <img src={logo} alt="" />
+              <img src={data.site_logo || logo} alt="" />
             </Link>
           </div>
           <div className="registration-form-header-body">
             <div className="title">
-              <h2>AMU ISLAMIC CENTER</h2>
+              <h2>{data.site_organization_name}</h2>
             </div>
             <div className="address">
-              <p>S 104 Rose Street, Paradis City 50047</p>
+              <p>{data.site_address}</p>
             </div>
             <div className="phone">
-              <p>+ 0123 456 789 | + 0123 456 789</p>
+              <p>
+                {data.site_phone_one} | {data.site_phone_two}
+              </p>
             </div>
             <div className="email">
-              <p>mailaccount@gmail.com | www.websitename.com</p>
+              <p>{data.site_email} | www.websitename.com</p>
             </div>
           </div>
         </div>

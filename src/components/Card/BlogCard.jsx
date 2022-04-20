@@ -31,7 +31,7 @@ export default function BlogCard({ data }) {
             </p>
           </div>
 
-          <p>{data.description}</p>
+          <p>{data.meta_desc}</p>
 
           <div class="cause-card__bottom_event">
             <Link to="/event_detail" class="thm-btn dynamic-radius">

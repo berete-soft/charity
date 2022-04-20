@@ -1,12 +1,14 @@
 import React from "react";
 // import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
+import About from "../layout/About";
+import Cause from "../layout/Cause";
 import Footer from "../layout/Footer";
 import Package from "../layout/Package";
+import VideoCard from "../layout/VideoCard";
 import Accordion from "./accordion/Accordion";
 import Header from "./header/Header";
 import BlogSlider from "./Slider/BlogSlider";
-import CauseSlider from "./Slider/CauseSlider";
 import LogoSlider from "./Slider/LogoSlider";
 import MainSlider from "./Slider/MainSlider";
 import ServiceSlider from "./Slider/ServiceSlider";
@@ -23,114 +25,9 @@ function Home() {
             <ServiceSlider />
           </div>
         </section>
-        <section className="about-two pt-120 pb-120">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-6">
-                <div
-                  className="about-two__image wow fadeInLeft"
-                  data-wow-duration="1500ms"
-                >
-                  <img src="assets/images/resources/welcome-1-1.png" alt="" />
-                  <div className="about-two__award">
-                    <img
-                      src="assets/images/shapes/Linkbout-bag-1-2.png"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-6">
-                <div className="about-two__content">
-                  <div className="block-title">
-                    <h3>Welcome to non-profit charity organization.</h3>
-                  </div>
-                  <p className="mb-40 pr-10">
-                    Lorem ipsum dolor sit amet, consectetur notted adipisicing
-                    elit sed do eiusmod tempor incididunt simply free ut labore
-                    et dolore magna aliqua simhy adndnh qkhhn.
-                  </p>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="about-two__box">
-                        <h3>
-                          <i className="azino-icon-confirmation"></i> Become a
-                          Volunteer
-                        </h3>
-                        <p>
-                          Lorem ipsum dolor sit ametelit sed consectetur notted.
-                        </p>
-                      </div>
-                      <div className="about-two__box">
-                        <h3>
-                          <i className="azino-icon-confirmation"></i> Quick
-                          Fundraising
-                        </h3>
-                        <p>
-                          Lorem ipsum dolor sit ametelit sed consectetur notted.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="about-two__box-two">
-                        <i className="azino-icon-support"></i>
-                        <h3>
-                          You can make a big difference in someone’s life.
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                  <Link to="about.html" className="thm-btn dynamic-radius">
-                    Discover More
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="video-card">
-          <div className="video-card__bg"></div>
-          <div className="container text-center pt-120 pb-120">
-            <h3>Our fingerprints on the lives we touch never fade.</h3>
-            <div className="video-card__btn-block">
-              <Link to="cause-details.html" className="thm-btn dynamic-radius">
-                Start Donating
-              </Link>
-
-              <Link
-                to="https://www.youtube.com/watch?v=k0ZvG_917YI"
-                className="video-popup video-card__btn"
-              >
-                <i className="fa fa-play"></i>
-              </Link>
-            </div>
-          </div>
-        </section>
-        <section className="causes-page causes-home pt-120 pb-120">
-          <div className="container">
-            <div className="row align-items-start align-items-md-center flex-column flex-md-row mb-60">
-              <div className="col-lg-7">
-                <div className="block-title">
-                  <h3>
-                    We also have other Communities Causes that need helps around
-                    the World.{" "}
-                  </h3>
-                </div>
-              </div>
-              <div className="col-lg-5 d-flex">
-                <div className="my-auto">
-                  <p className="block-text pr-10 mb-0">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Have you done google research which
-                    works all the time.{" "}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <CauseSlider />
-          </div>
-        </section>
+        <About />
+        <VideoCard />
+        <Cause />
         <section className="faq-one pt-120">
           <div className="container">
             <div className="row">

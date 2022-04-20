@@ -1,34 +1,29 @@
-import { useState } from "react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import img1 from "../../assets/images/main-slider/Canpy-ISI-border.jpg";
-import img2 from "../../assets/images/main-slider/Islamic_school.jpg";
-import img3 from "../../assets/images/main-slider/madarsa.jpg";
+import { ThemeContext } from "../../context/ThemeContext";
+import Values from "../../Values";
 
 export default function MainSlider() {
-  const [slide, setSlide] = useState([
-    {
-      img: img1,
-      title: "Your Donation Can Change Someone's Future",
-      text: "",
-      btn: "Donate Now",
-      rtl: false,
-    },
-    {
-      img: img2,
-      title: "Votre Don Pourrait Changer le Future de Quelqu'un",
-      text: "",
-      btn: "Faites le Don Maintenant",
-      rtl: false,
-    },
-    {
-      img: img3,
-      title: "تبرعك يمكن أن يغير مستقبل شخص ما",
-      text: "",
-      btn: "تبرع الان",
-      rtl: true,
-    },
-  ]);
+  const [slide, setSlide] = useState([]);
+  const context = useContext(ThemeContext);
+
+  const URL = `${Values.BASE_URL}slider_section`;
+
+  useEffect(() => {
+    axios
+      .get(URL, {
+        headers: {
+          language: context.language,
+        },
+      })
+      .then((d) => {
+        setSlide(d.data.response);
+      })
+      .catch((e) => console.log(e.response));
+  }, [context.language]);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -45,23 +40,28 @@ export default function MainSlider() {
         {slide.map((data, i) => (
           <div key={i} className="main-slider-item">
             <div className="image-layer">
-              <img src={data.img} alt="" />
+              <img src={data.image} alt="" />
             </div>
             <div className="container">
               <div
                 className={`row ${
-                  (data.rtl && "justify-content-end") || "justify-content-start"
+                  (context.rtl && "justify-content-end") ||
+                  "justify-content-start"
                 }`}
               >
-                <div className="col-xl-7 col-lg-12 text-left">
-                  <h2>{data.title}</h2>
-                  <p>{data.text}</p>
+                <div
+                  className={`col-xl-7 col-lg-12  ${
+                    (context.rtl && "text-right") || "text-left"
+                  }`}
+                >
+                  <h2 className="">{data.text}</h2>
+                  {/* <p>{data.text}</p> */}
                   <Link
                     to="/donate"
                     data-target=".donate-options"
-                    className="scroll-to-target thm-btn dynamic-radius"
+                    className="scroll-to-target thm-btn dynamic-radius mt-5"
                   >
-                    {data.btn}
+                    {data.button_text}
                   </Link>
                 </div>
               </div>

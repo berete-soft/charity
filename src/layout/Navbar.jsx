@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 // import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
+import Language from "../components/basic/Language";
 function Navbar() {
   const ref = useRef();
   const navHandler = () => {
@@ -15,16 +16,7 @@ function Navbar() {
           <div className="container">
             <p>Welcome to Manden Islamic Center Registration Platform</p>
 
-            <div className="main-header__language">
-              <div className="main-header__language-image"></div>
-              <label for="language-header" className="sr-only">
-                select language
-              </label>
-              <select className="selectpicker" id="language-header">
-                <option value="#googtrans(en|en)">EN</option>
-                <option value="#googtrans(en|ar)">AR</option>
-              </select>
-            </div>
+            <Language />
 
             <div className="main-header__social">
               <a href="#" aria-label="twitter">

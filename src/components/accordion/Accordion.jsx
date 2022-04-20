@@ -1,7 +1,27 @@
-import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { useContext, useEffect, useRef, useState } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
+import Values from "../../Values";
 
 export default function Accordion() {
+  const context = useContext(ThemeContext);
+  const URL = `${Values.BASE_URL}cause_section`;
   const [datas, setDatas] = useState([1, 1, 1]);
+
+  useEffect(() => {
+    axios
+      .get(URL, {
+        headers: {
+          language: context.language,
+        },
+      })
+      .then((d) => {
+        setDatas(d.data.response);
+        console.log(d.data.response);
+      })
+      .catch((e) => console.log(e.response));
+  }, [context.language]);
+
   const ref = useRef();
 
   useEffect(() => {
@@ -17,23 +37,20 @@ export default function Accordion() {
 
   return (
     <ul id="accordion" className=" list-unstyled">
-      {datas.map((data, i) => (
-        <li ref={ref} key={i} className="">
-          <h2 className="para-title">
-            <span className="collapsed">
-              <i className="fa fa-plus"></i>
-              Make a difference in their life
-            </span>
-          </h2>
-          <div id="" className="collapse">
-            <p>
-              There are many variations of passages the majority have suffered
-              alteration in some fo injected humour, or randomised words
-              believable.
-            </p>
-          </div>
-        </li>
-      ))}
+      {datas &&
+        datas.map((data, i) => (
+          <li ref={ref} key={i} className="">
+            <h2 className="para-title">
+              <span className="collapsed">
+                <i className="fa fa-plus"></i>
+                {data.title}
+              </span>
+            </h2>
+            <div id="" className="collapse">
+              <p>{data.body}</p>
+            </div>
+          </li>
+        ))}
     </ul>
   );
 }
