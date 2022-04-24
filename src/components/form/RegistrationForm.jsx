@@ -6,38 +6,38 @@ import Values from "../../Values";
 
 export default function RegistrationForm() {
   const [date, setDate] = useState(new Date().toLocaleDateString("en-GB"));
-  // const [membership, setMembership] = useState("");
 
-  //personal Information
+  // user Information
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [releated, setReleated] = useState("");
+  const [password, setPassword] = useState("");
+
+  //personal Information
+
   const [gender, setGender] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [birthPlace, setBirthPlace] = useState("");
+  const [adult, setAdult] = useState(false);
   const [fatherName, setFatherName] = useState("");
   const [motherName, setMotherName] = useState("");
   const [nationality, setNationality] = useState("");
   const [religion, setReligion] = useState("");
-  const [residentState, setResidentState] = useState("");
   const [maritalState, setMaritalState] = useState("");
-  // const [nationalID, setNationalID] = useState("");
-  // const [drivingLicense, setDrivingLicense] = useState("");
-  // const [tinNo, setTinNo] = useState("");
-  // const [passportNo, setPassportNo] = useState("");
   const [profession, setProfession] = useState("");
 
   // conract Details
   const [presentAddress, setPresentAddress] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const [country, setCountry] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
 
   const [countryList, setCountryList] = useState([]);
+  const [stateList, setStateList] = useState([]);
+  const religionList = ["muslim", "hindu"];
+
   const [data, setData] = useState({});
-  console.log(data);
 
   useEffect(() => {
     const url = `${Values.BASE_URL}site_settings`;
@@ -50,8 +50,28 @@ export default function RegistrationForm() {
         console.log(e);
       });
 
-    const date = new Date().toLocaleDateString("en-GB");
-  }, []);
+    // countris api
+    const urlCountry = `${Values.BASE_URL}countries`;
+
+    axios
+      .get(urlCountry)
+      .then((d) => {
+        setCountryList(d.data.response);
+      })
+      .catch((e) => console.log(e.response));
+
+    // states API
+    if (country) {
+      const urlState = `${Values.BASE_URL}${country}/states`;
+
+      axios
+        .get(urlState)
+        .then((d) => {
+          setStateList(d.data.response);
+        })
+        .catch((e) => {});
+    }
+  }, [country]);
 
   // handler
 
@@ -59,11 +79,15 @@ export default function RegistrationForm() {
     setDate(e.target.value);
   };
 
-  // const membershipHandler = (e) => {
-  //   setMembership(e.target.value);
-  // };
+  // user information
 
-  // for personal Information
+  const stateHandler = (e) => {
+    setState(e.target.value);
+  };
+  const countryHandler = (e) => {
+    setCountry(e.target.value);
+  };
+
   const firstNameHandler = (e) => {
     setFirstName(e.target.value);
   };
@@ -71,16 +95,33 @@ export default function RegistrationForm() {
     setLastName(e.target.value);
   };
 
+  const phoneHandler = (e) => {
+    setPhone(e.target.value);
+  };
+
+  const emailHandler = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const releatedHandler = (e) => {
+    setReleated(e.target.value);
+  };
+
+  const passwordHandler = (e) => {
+    setPassword(e.target.value);
+  };
+
+  // for personal Information
+
   const genderHandler = (e) => {
     setGender(e.target.value);
   };
-
-  const birthDateHandler = (e) => {
-    setBirthDate(e.target.value);
-  };
-
-  const birthPlaceHandler = (e) => {
-    setBirthPlace(e.target.value);
+  const adultHandler = (e) => {
+    if (e.target.value === "yes") {
+      setAdult(true);
+    } else {
+      setAdult(false);
+    }
   };
 
   const fatherNameHandler = (e) => {
@@ -99,29 +140,12 @@ export default function RegistrationForm() {
     setReligion(e.target.value);
   };
 
-  const residentStateHandler = (e) => {
-    setResidentState(e.target.value);
-  };
-
   const maritalStateHandler = (e) => {
     setMaritalState(e.target.value);
   };
-
-  // const nationalIdHandler = (e) => {
-  //   setNationalID(e.target.value);
-  // };
-
-  // const drivingLicenseHandler = (e) => {
-  //   setDrivingLicense(e.target.value);
-  // };
-
-  // const tinNoHandler = (e) => {
-  //   setTinNo(e.target.value);
-  // };
-
-  // const passportNoHandler = (e) => {
-  //   setPassportNo(e.target.value);
-  // };
+  const professionHandler = (e) => {
+    setProfession(e.target.value);
+  };
 
   // for contact details
 
@@ -133,62 +157,70 @@ export default function RegistrationForm() {
     setCity(e.target.value);
   };
 
-  const stateHandler = (e) => {
-    setState(e.target.value);
-  };
-
   const postalCodeHandler = (e) => {
     setPostalCode(e.target.value);
   };
 
-  const countryHandler = (e) => {
-    setCountry(e.target.value);
-  };
+  // data handler
 
-  const phoneHandler = (e) => {
-    setPhone(e.target.value);
-  };
+  const dataHandler = (userID) => {
+    const data = {
+      first_name: firstName,
+      last_name: lastName,
+      state,
+      email,
+      phone,
+      password,
+      releated: userID,
 
-  const emailHandler = (e) => {
-    setEmail(e.target.value);
-  };
-  const professionHandler = (e) => {
-    setProfession(e.target.value);
+      adult,
+      gender,
+      father_name: fatherName,
+      mother_name: motherName,
+      membership_type: "Premium",
+      nationality,
+      religion,
+      martial_status: maritalState,
+      profession,
+
+      present_address: presentAddress,
+      postal_code: postalCode,
+      city,
+    };
+
+    const url = `${Values.BASE_URL}register_new_member`;
+    console.log(data);
+
+    axios
+      .post(url, data)
+      .then((d) => alert(d.data.message))
+      .catch((e) => {
+        console.log(e.response);
+        // alert("Please fill up all fields");
+      });
   };
 
   // submit hander
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const data = {
-      first_name: firstName,
-      last_name: lastName,
-      gender,
-      place_birth: birthPlace,
-      father_name: fatherName,
-      mother_name: motherName,
-      // membership_type: membership,
-      nationality,
-      religion,
-      resident_status: residentState,
-      martial_status: maritalState,
-      profession,
-      present_address: presentAddress,
-      postal_code: postalCode,
-      city,
-      state,
-      country,
-      phone,
-    };
-    const url = `${Values.BASE_URL}register_new_member`;
 
-    axios
-      .post(url, data)
-      .then((d) => alert(d.data.message))
-      .catch((e) => {
-        // console.log(e.response.data.errors);
-        alert("Please fill up all fields");
-      });
+    if (releated) {
+      const releatedURL = `${Values.BASE_URL}member/${releated.trim()}`;
+
+      axios
+        .get(releatedURL)
+        .then((d) => {
+          const userId = d.data.response.info.user_id;
+          dataHandler(userId);
+        })
+        .catch((e) => {
+          alert("Invalid Releated code!");
+          console.log(releatedURL);
+        });
+    } else {
+      dataHandler();
+    }
   };
 
   return (
@@ -240,44 +272,41 @@ export default function RegistrationForm() {
                 className="date"
                 onChange={(e) => dateHandler(e)}
               />
-              {/* <div className="radio-wrp">
-                <span>Membership Type</span>
-                <div className="radio-group">
-                  <input
-                    type="radio"
-                    name="membership"
-                    id="regular"
-                    value="regular"
-                    onChange={(e) => membershipHandler(e)}
-                  />
-                  <label htmlFor="regular">Regular</label>
-                </div>
-                <div className="radio-group">
-                  <input
-                    type="radio"
-                    name="membership"
-                    id="premium"
-                    value="premium"
-                    onChange={(e) => membershipHandler(e)}
-                  />
-                  <label htmlFor="premium">Premium</label>
-                </div>
-                <div className="radio-group">
-                  <input
-                    type="radio"
-                    name="membership"
-                    id="vip"
-                    value="vip"
-                    onChange={(e) => membershipHandler(e)}
-                  />
-                  <label htmlFor="vip">Vip</label>
-                </div>
-              </div> */}
             </div>
+
+            {/* user Information  */}
             <div className="registration-personal">
               <div className="group-title">
-                <h2>PERSONAL INFORMATION</h2>
+                <h2>User Details</h2>
               </div>
+              <div className="input-grid">
+                <select
+                  type="text"
+                  name="countris"
+                  onChange={(e) => countryHandler(e)}
+                >
+                  <option> -- Select Country -- </option>
+                  {countryList.map((countri, i) => (
+                    <option key={i} value={countri}>
+                      {" "}
+                      {countri}{" "}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  type="text"
+                  name="name"
+                  onChange={(e) => stateHandler(e)}
+                >
+                  <option> -- Select State -- </option>
+                  {stateList.map((d, i) => (
+                    <option value={d.id} key={i}>
+                      {d.name}{" "}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div className="input-grid">
                 <input
                   type="text"
@@ -294,6 +323,48 @@ export default function RegistrationForm() {
                   onChange={(e) => lastNameHandler(e)}
                 />
               </div>
+
+              <div className="input-grid">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Phone"
+                  value={phone}
+                  onChange={(e) => phoneHandler(e)}
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => emailHandler(e)}
+                />
+              </div>
+              <div className="input-grid">
+                <input
+                  type="text"
+                  name="releated"
+                  placeholder="If you have releated enter code"
+                  value={releated}
+                  onChange={(e) => releatedHandler(e)}
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => passwordHandler(e)}
+                />
+              </div>
+            </div>
+
+            {/* personal Information */}
+
+            <div className="registration-personal">
+              <div className="group-title">
+                <h2>PERSONAL INFORMATION</h2>
+              </div>
+
               <div className="radio-wrp">
                 <span>Gender:</span>
                 <div className="radio-group">
@@ -317,22 +388,31 @@ export default function RegistrationForm() {
                   />
                 </div>
               </div>
-              <div className="input-grid">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Date of Birth"
-                  value={birthDate}
-                  onChange={(e) => birthDateHandler(e)}
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Place of Birth"
-                  value={birthPlace}
-                  onChange={(e) => birthPlaceHandler(e)}
-                />
+
+              <div className="radio-wrp">
+                <span>Are you adult?</span>
+                <div className="radio-group">
+                  <label htmlFor="on18">Yes</label>
+                  <input
+                    type="radio"
+                    name="age"
+                    id="on18"
+                    value="yes"
+                    onChange={(e) => adultHandler(e)}
+                  />
+                </div>
+                <div className="radio-group">
+                  <label htmlFor="under18">No</label>
+                  <input
+                    type="radio"
+                    name="age"
+                    id="under18"
+                    value="no"
+                    onChange={(e) => adultHandler(e)}
+                  />
+                </div>
               </div>
+
               <div className="input-grid">
                 <input
                   type="text"
@@ -357,37 +437,19 @@ export default function RegistrationForm() {
                   value={nationality}
                   onChange={(e) => nationalityHandler(e)}
                 />
-                <input
+                <select
                   type="text"
-                  name="lastName"
-                  placeholder="Religion"
-                  value={religion}
+                  name="name"
+                  placeholder="Present Address"
                   onChange={(e) => religionHandler(e)}
-                />
-              </div>
-
-              <div className="radio-wrp">
-                <span>Resident Status: </span>
-                <div className="radio-group">
-                  <label htmlFor="Resident">Resident</label>
-                  <input
-                    type="radio"
-                    name="Resident-Status"
-                    id="Resident"
-                    value="resident"
-                    onChange={(e) => residentStateHandler(e)}
-                  />
-                </div>
-                <div className="radio-group">
-                  <label htmlFor="Non-Resident">Non-Resident</label>
-                  <input
-                    type="radio"
-                    name="Resident-Status"
-                    id="Non-Resident"
-                    value="non-resident"
-                    onChange={(e) => residentStateHandler(e)}
-                  />
-                </div>
+                >
+                  <option> -- Select Religion -- </option>
+                  {religionList.map((d, i) => (
+                    <option key={i} value={d}>
+                      {d}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="radio-wrp">
@@ -483,43 +545,10 @@ export default function RegistrationForm() {
                 />
                 <input
                   type="text"
-                  name="lastName"
-                  placeholder="State"
-                  value={state}
-                  onChange={(e) => stateHandler(e)}
-                />
-              </div>
-
-              <div className="input-grid">
-                <input
-                  type="text"
                   name="name"
                   placeholder="Postal Code"
                   value={postalCode}
                   onChange={(e) => postalCodeHandler(e)}
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Country"
-                  value={country}
-                  onChange={(e) => countryHandler(e)}
-                />
-              </div>
-              <div className="input-grid">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Phone"
-                  value={phone}
-                  onChange={(e) => phoneHandler(e)}
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => emailHandler(e)}
                 />
               </div>
             </div>

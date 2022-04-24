@@ -162,7 +162,8 @@
               text-transform: capitalize;
             }
 
-            input {
+            input,
+            select {
               height: 2.4rem;
               margin-left: 0.5rem;
               display: inline;
@@ -171,6 +172,8 @@
               outline: none;
               padding: 0.5rem;
               color: $thm-text-dark;
+              background-color: #fff;
+              color: $thm-black;
             }
           }
 

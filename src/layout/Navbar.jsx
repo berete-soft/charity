@@ -91,6 +91,9 @@ function Navbar() {
               <li className=" ">
                 <Link to="/about">About us</Link>
               </li>
+              <li className=" ">
+                <Link to="/videos">Videos</Link>
+              </li>
 
               <li className="  ">
                 <Link to="/contact">Contact</Link>

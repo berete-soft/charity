@@ -10,6 +10,7 @@ import DonationForm from "./components/form/DonationForm";
 import PaymentForm from "./components/form/PaymentForm";
 import RegistrationForm from "./components/form/RegistrationForm";
 import Home from "./components/Home";
+import VideoGellary from "./layout/VideoGellary";
 export default function RoutePage() {
   return (
     <div>
@@ -25,6 +26,7 @@ export default function RoutePage() {
           <Route path="/registation" element={<RegistrationForm />}></Route>
           <Route path="/donate" element={<DonationForm />}></Route>
           <Route path="/payment" element={<PaymentForm />}></Route>
+          <Route path="/videos" element={<VideoGellary />}></Route>
         </Routes>
       </Router>
     </div>

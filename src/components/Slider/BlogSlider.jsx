@@ -1,24 +1,30 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
+import { ThemeContext } from "../../context/ThemeContext";
 import Values from "../../Values";
 import BlogCard from "../Card/BlogCard";
 
 export default function BlogSlider() {
   const [slide, setSlide] = useState([]);
+  const context = useContext(ThemeContext);
 
   const url = `${Values.BASE_URL}event_list`;
 
   useEffect(() => {
     axios
-      .get(url)
+      .get(url, {
+        headers: {
+          language: context.language,
+        },
+      })
       .then((d) => {
         setSlide(d.data.response);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [context.language]);
 
   const settings = {
     dots: false,
