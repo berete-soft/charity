@@ -11,6 +11,12 @@ function App() {
     localStorage.setItem("language", e.target.value);
     setLanguage(e.target.value);
   };
+  const [paymentData, setPaymentData] = useState({});
+  const paymentHandler = (data) => {
+    setPaymentData(data);
+  };
+
+  console.log(paymentData);
 
   useEffect(() => {
     if (language === "ar" || language === "ko") {
@@ -22,7 +28,9 @@ function App() {
 
   return (
     <div className="App">
-      <ThemeContext.Provider value={{ languageHandler, language, rtl }}>
+      <ThemeContext.Provider
+        value={{ languageHandler, language, rtl, paymentData, paymentHandler }}
+      >
         <RoutePage />
       </ThemeContext.Provider>
     </div>

@@ -1,11 +1,16 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { FaRegCreditCard, FaUserAlt } from "react-icons/fa";
 import img1 from "../../assets/images/form/img-1.png";
+import img4 from "../../assets/images/form/img5.png";
+import img5 from "../../assets/images/form/img6.jpg";
 import sliderImg from "../../assets/images/form/slider-img.png";
+import { ThemeContext } from "../../context/ThemeContext";
 import Values from "../../Values";
 
 export default function DonationForm() {
   const corporateRef = useRef();
+  const context = useContext(ThemeContext);
 
   const isCorporate = (e) => {
     if (e.target.checked) {
@@ -111,12 +116,100 @@ export default function DonationForm() {
     setEmail(e.target.value);
   };
 
+  // payment system
+
+  const paymentType = document.querySelectorAll(".payment-type");
+  const paymentOption = document.querySelectorAll(
+    ".payment-body-left-card-body"
+  );
+  const [paymentMethod, setPaymentMethod] = useState("");
+
+  for (let i = 0; i < paymentType.length; i++) {
+    paymentType[i].addEventListener("change", (e) => {
+      setPaymentMethod(e.target.value);
+      for (let j = 0; j < paymentOption.length; j++) {
+        paymentOption[j].classList.add("height-0");
+      }
+      paymentOption[i].classList.remove("height-0");
+    });
+  }
+
+  const [transactionNumBank, setTransactionNumBank] = useState("");
+  const [transactionNumZelle, setTransactionNumZelle] = useState("");
+  const [checkNum, setCheckNum] = useState("");
+  const [reciverName, setReciverName] = useState("");
+  const [reciverPhone, setReciverPhone] = useState("");
+
+  // transaction handler
+  const transactionNumBankHandler = (e) => {
+    setTransactionNumBank(e.target.value);
+  };
+  const transactionNumZelleHandler = (e) => {
+    setTransactionNumZelle(e.target.value);
+  };
+  const checkNumHandler = (e) => {
+    setCheckNum(e.target.value);
+  };
+  const reciverNameHandler = (e) => {
+    setReciverName(e.target.value);
+  };
+  const reciverPhoneHandler = (e) => {
+    setReciverPhone(e.target.value);
+  };
+
   // submit handler
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    window.location.href = "/payment";
+    if (
+      firstName &&
+      lastName &&
+      address1 &&
+      city &&
+      countri &&
+      state &&
+      phone &&
+      email &&
+      time &&
+      amount &&
+      paymentMethod
+    ) {
+      const data = {
+        first_name: firstName,
+        last_name: lastName,
+        corporate_name: corporateName,
+        address_1: address1,
+        address_2: address2,
+        city,
+        country: countri,
+        state_id: state,
+        phone,
+        email,
+        donation_type: time,
+        amount,
+        method: 1,
+        info: {
+          paymentMethod,
+          transactionNumBank,
+          checkNum,
+          transactionNumZelle,
+          reciverName,
+          reciverPhone,
+        },
+      };
+
+      // api system
+      const POSTURL = `${Values.BASE_URL}guest-payments`;
+      axios
+        .post(POSTURL, data)
+        .then((d) => {
+          console.log(d.data.message);
+        })
+        .then((e) => console.log(e.response));
+    } else {
+      alert("please enter all field!");
+    }
   };
 
   return (
@@ -414,11 +507,158 @@ export default function DonationForm() {
                     <span>*</span>Email Address:
                   </label>
                   <input
-                    type="text"
+                    type="email"
                     id="email"
                     onChange={(e) => emailHandler(e)}
                     value={email}
                   />
+                </div>
+              </div>
+
+              {/* payment information */}
+              <br />
+
+              <div className="payment-body-laft-card-wrp">
+                <div className="payment-body-left-card">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="payment"
+                      id="credit"
+                      className="payment-type"
+                      value="bankTransfer"
+                    />
+                    <label htmlFor="credit">Bank Transfer</label>
+                  </div>
+                  <div className="img"></div>
+                </div>
+                <div className="payment-body-left-card-body height-0">
+                  <div className="left">
+                    <p>Bank Name: CHASE BANK</p>
+                    <p>Acount Number: 87475987423</p>
+                    <p>Routing Number: 347892383497</p>
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        name="bankInfo"
+                        placeholder="Transaction number"
+                        onChange={(e) => transactionNumBankHandler(e)}
+                      />
+                    </div>
+                  </div>
+                  <div className="right">
+                    <img src={img4} alt="" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="payment-body-laft-card-wrp">
+                <div className="payment-body-left-card">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="payment"
+                      id="credit"
+                      className="payment-type"
+                      value="checkPayment"
+                    />
+                    <label htmlFor="credit">Check Payment</label>
+                  </div>
+                  <div className="img"></div>
+                </div>
+                <div className="payment-body-left-card-body height-0">
+                  <div className="left">
+                    <p>
+                      <strong>Please Pay to:</strong> manden islamic Center
+                    </p>
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        placeholder="Enter check Number"
+                        onChange={(e) => checkNumHandler(e)}
+                      />
+                    </div>
+                  </div>
+                  <div className="right">
+                    <img src={img5} alt="" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="payment-body-laft-card-wrp">
+                <div className="payment-body-left-card">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="payment"
+                      id="credit"
+                      className="payment-type"
+                      value="zellePayment"
+                    />
+                    <label htmlFor="credit">Zelle Payment</label>
+                  </div>
+                  <div className="img"></div>
+                </div>
+                <div className="payment-body-left-card-body height-0">
+                  <div className="left">
+                    <p>
+                      <strong>Email:</strong> pay@gmail.com
+                    </p>
+                    <p>
+                      <strong>Phone:</strong> 7287439873
+                    </p>
+
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        name="zelleInfo"
+                        placeholder="Transaction number"
+                        onChange={(e) => transactionNumZelleHandler(e)}
+                      />
+                    </div>
+                  </div>
+                  <div className="right"></div>
+                </div>
+              </div>
+
+              <div className="payment-body-left-card-wrp">
+                <div className="payment-body-left-card">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="payment"
+                      id="credit"
+                      className="payment-type"
+                      value="chaspayment"
+                    />
+                    <label htmlFor="credit">Cash Payment</label>
+                  </div>
+                  <div className="img"></div>
+                </div>
+                <div className="payment-body-left-card-body height-0">
+                  <div className="left">
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        placeholder="Enter Full Name of the Reciver"
+                        onChange={(e) => reciverNameHandler(e)}
+                      />
+                      <span>
+                        <FaUserAlt />
+                      </span>
+                    </div>
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        placeholder="Ender Reciver Phone Number"
+                        onChange={(e) => reciverPhoneHandler(e)}
+                      />
+                      <span>
+                        <FaRegCreditCard />
+                      </span>
+                    </div>
+                  </div>
+                  <div className="right"></div>
                 </div>
               </div>
 

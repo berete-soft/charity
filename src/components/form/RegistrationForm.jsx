@@ -168,6 +168,7 @@ export default function RegistrationForm() {
       first_name: firstName,
       last_name: lastName,
       state,
+      country,
       email,
       phone,
       password,
@@ -189,10 +190,13 @@ export default function RegistrationForm() {
     };
 
     const url = `${Values.BASE_URL}register_new_member`;
-    console.log(data);
 
     axios
-      .post(url, data)
+      .post(url, data, {
+        headers: {
+          "X-CSRF-TOKEN": "tokenvasdasdaluetobeinserted235kwgeiOIulgsk",
+        },
+      })
       .then((d) => alert(d.data.message))
       .catch((e) => {
         console.log(e.response);
