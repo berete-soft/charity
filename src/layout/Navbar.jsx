@@ -1,13 +1,16 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 // import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import Language from "../components/basic/Language";
+import { ThemeContext } from "../context/ThemeContext";
 function Navbar() {
   const ref = useRef();
   const navHandler = () => {
     ref.current.classList.toggle("active");
   };
+
+  const context = useContext(ThemeContext);
 
   return (
     <div>
@@ -31,6 +34,11 @@ function Navbar() {
               <a href="#" aria-label="instagram">
                 <i className="fab fa-instagram"></i>
               </a>
+              {!context.isLogin && (
+                <Link to="/login" className="login-btn">
+                  Login
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -104,8 +112,11 @@ function Navbar() {
                 </a>
               </li>
             </ul>
-            <Link to="/registation" className="thm-btn dynamic-radius">
-              REGISTRATION
+            <Link
+              to={(context.isLogin && "/payment") || "/registation"}
+              className="thm-btn dynamic-radius"
+            >
+              {(context.isLogin && "PAYMENT") || "REGISTRATION"}
             </Link>
           </div>
         </nav>

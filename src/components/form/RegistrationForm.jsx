@@ -1,11 +1,35 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import logo from "../../assets/images/logo.png";
 import Values from "../../Values";
 
 export default function RegistrationForm() {
   const [date, setDate] = useState(new Date().toLocaleDateString("en-GB"));
+
+  const tostSuccess = (message) => {
+    toast.success(`${message}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+  const tostError = (message) => {
+    toast.error(`${message}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   // user Information
   const [country, setCountry] = useState("");
@@ -187,6 +211,7 @@ export default function RegistrationForm() {
       present_address: presentAddress,
       postal_code: postalCode,
       city,
+      place_birth: "11-06-2001",
     };
 
     const url = `${Values.BASE_URL}register_new_member`;
@@ -197,9 +222,14 @@ export default function RegistrationForm() {
           "X-CSRF-TOKEN": "tokenvasdasdaluetobeinserted235kwgeiOIulgsk",
         },
       })
-      .then((d) => alert(d.data.message))
+      .then((d) => {
+        tostSuccess(d.data.message);
+        location.reload();
+        // alert(d.data.message)
+      })
       .catch((e) => {
         console.log(e.response);
+        tostError(e.response.data.message);
         // alert("Please fill up all fields");
       });
   };
@@ -229,6 +259,17 @@ export default function RegistrationForm() {
 
   return (
     <div className="registration-form">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="registration-form-header">
         <div className="container">
           <div className="registration-form-header-logo">

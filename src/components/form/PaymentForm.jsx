@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect } from "react";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { FaBox, FaRegCreditCard, FaUserAlt } from "react-icons/fa";
 import img1 from "../../assets/images/form/img2.png";
@@ -5,8 +7,26 @@ import img2 from "../../assets/images/form/img3.jpg";
 import img3 from "../../assets/images/form/img4.png";
 import img4 from "../../assets/images/form/img5.png";
 import img5 from "../../assets/images/form/img6.jpg";
+import Values from "../../Values";
 
 export default function PaymentForm() {
+  useEffect(() => {
+    const getDataURL = `${Values.BASE_URL}payments`;
+    const Token = localStorage.getItem("loginData");
+    console.log(Token);
+    axios
+      .get(getDataURL, {
+        headers: {
+          Token,
+        },
+      })
+      .then((d) => {
+        console.log(d);
+      })
+      .catch((e) => {
+        console.log(e.response);
+      });
+  }, []);
   const Form = () => {
     return (
       <form action="">

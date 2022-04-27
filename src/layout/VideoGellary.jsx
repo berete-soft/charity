@@ -35,13 +35,14 @@ export default function VideoGellary() {
       .get(URLVIDEO, {
         headers: {
           language: context.language,
+          category: videoCat,
         },
       })
       .then((d) => {
         setVideos(d.data.response);
       })
       .catch((e) => console.log(e.response));
-  }, [context.language]);
+  }, [context.language, videoCat]);
 
   return (
     <>
@@ -51,7 +52,7 @@ export default function VideoGellary() {
           <ul className="video-catagory">
             <li className="video-catagory-item">
               <button
-                onClick={(e) => videoCatHandler("all")}
+                onClick={(e) => videoCatHandler("")}
                 className="video-catagory-link"
               >
                 All
@@ -60,7 +61,7 @@ export default function VideoGellary() {
             {catagori.map((d, i) => (
               <li key={i} className="video-catagory-item">
                 <button
-                  onClick={(e) => videoCatHandler(d.title)}
+                  onClick={(e) => videoCatHandler(d.id)}
                   className="video-catagory-link"
                 >
                   {d.title}

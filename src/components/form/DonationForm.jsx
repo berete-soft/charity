@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FaRegCreditCard, FaUserAlt } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 import img1 from "../../assets/images/form/img-1.png";
 import img4 from "../../assets/images/form/img5.png";
 import img5 from "../../assets/images/form/img6.jpg";
@@ -11,6 +12,28 @@ import Values from "../../Values";
 export default function DonationForm() {
   const corporateRef = useRef();
   const context = useContext(ThemeContext);
+
+  const tostSuccess = (message) => {
+    toast.success(`${message}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+  const tostError = (message) => {
+    toast.error(`${message}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
 
   const isCorporate = (e) => {
     if (e.target.checked) {
@@ -162,58 +185,57 @@ export default function DonationForm() {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (
-      firstName &&
-      lastName &&
-      address1 &&
-      city &&
-      countri &&
-      state &&
-      phone &&
-      email &&
-      time &&
-      amount &&
-      paymentMethod
-    ) {
-      const data = {
-        first_name: firstName,
-        last_name: lastName,
-        corporate_name: corporateName,
-        address_1: address1,
-        address_2: address2,
-        city,
-        country: countri,
-        state_id: state,
-        phone,
-        email,
-        donation_type: time,
-        amount,
-        method: 1,
-        info: {
-          paymentMethod,
-          transactionNumBank,
-          checkNum,
-          transactionNumZelle,
-          reciverName,
-          reciverPhone,
-        },
-      };
+    const data = {
+      first_name: firstName,
+      last_name: lastName,
+      corporate_name: corporateName,
+      address_1: address1,
+      address_2: address2,
+      city,
+      country: countri,
+      state_id: state,
+      phone,
+      email,
+      donation_type: time,
+      amount,
+      method: 1,
+      info: {
+        paymentMethod,
+        transactionNumBank,
+        checkNum,
+        transactionNumZelle,
+        reciverName,
+        reciverPhone,
+      },
+    };
 
-      // api system
-      const POSTURL = `${Values.BASE_URL}guest-payments`;
-      axios
-        .post(POSTURL, data)
-        .then((d) => {
-          console.log(d.data.message);
-        })
-        .then((e) => console.log(e.response));
-    } else {
-      alert("please enter all field!");
-    }
+    // api system
+    const POSTURL = `${Values.BASE_URL}guest-payments`;
+    axios
+      .post(POSTURL, data)
+      .then((d) => {
+        tostSuccess(d.data.message);
+
+        location.reload();
+      })
+      .catch((e) => {
+        tostError(e.response.data.message);
+      });
   };
 
   return (
     <main className="donation">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="donation-header">
         <img src={sliderImg} alt="" />
       </div>

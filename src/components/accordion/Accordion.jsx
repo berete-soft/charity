@@ -5,7 +5,7 @@ import Values from "../../Values";
 
 export default function Accordion() {
   const context = useContext(ThemeContext);
-  const URL = `${Values.BASE_URL}cause_section`;
+  const URL = `${Values.BASE_URL}faqs`;
   const [datas, setDatas] = useState([1, 1, 1]);
 
   useEffect(() => {
@@ -17,7 +17,6 @@ export default function Accordion() {
       })
       .then((d) => {
         setDatas(d.data.response);
-        console.log(d.data.response);
       })
       .catch((e) => console.log(e.response));
   }, [context.language]);
