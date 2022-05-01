@@ -9,7 +9,7 @@ export default function Language() {
       <div className="main-header__language-image"></div>
       <select
         onChange={(e) => context.languageHandler(e)}
-        className="selectpicker"
+        className="selectpicker" 
         id="language-header"
       >
         <option selected={context.language === "en" && true} value="en">

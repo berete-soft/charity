@@ -27,8 +27,9 @@ export default function VideoGellary() {
       })
       .then((d) => {
         setCatagori(d.data.response);
+        console.log(d.data.response)
       })
-      .catch((e) => console.log(e.response));
+      .catch((e) => console.log(e));
 
     // videos
     axios

@@ -7,7 +7,7 @@ import RoutePage from "./RoutePage";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [language, setLanguage] = useState(localStorage.getItem("language"));
+  const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
   const [rtl, setRtl] = useState(false);
   const languageHandler = (e) => {
     localStorage.setItem("language", e.target.value);

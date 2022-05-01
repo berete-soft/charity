@@ -24,7 +24,7 @@ export default function RoutePage({ isLogin }) {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Event />} />
-          <Route path="/event_detail" element={<Event_Detail />} />
+          <Route path="/event_detail/:id" element={<Event_Detail />} />
           <Route path="/about" element={<About />} />
           <Route path="/causes" element={<Causes />} />
           <Route path="/causes_detail" element={<Causes_Detail />} />

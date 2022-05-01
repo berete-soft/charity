@@ -34,7 +34,7 @@ export default function BlogCard({ data }) {
           <p>{data.meta_desc}</p>
 
           <div class="cause-card__bottom_event">
-            <Link to="/event_detail" class="thm-btn dynamic-radius">
+            <Link to={`/event_detail/${data.id}`} class="thm-btn dynamic-radius">
               Read More
             </Link>
             <Link to="#" class="cause-card__share" aria-label="share postr">

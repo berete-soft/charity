@@ -1,7 +1,33 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ThemeContext } from "../context/ThemeContext";
 import Footer from "../layout/Footer";
+import Values from "../Values";
 import Header from "./header/Header";
 function Event_Detail() {
+  const [data, setData] = useState()
+  const context = useContext(ThemeContext)
+
+  const id = useParams()
+  
+  useEffect(()=> {
+    const URL = `${Values.BASE_URL}event/${id.id}`;
+
+    axios.get(URL, {
+      headers: {
+        language: context.language,
+      }
+    }).then(d=> {
+      console.log(d.data.response)
+      setData(d.data.response)
+    }).catch(e=> {
+      console.log(e.response)
+    })
+  },[context.language])
+
+
+
   return (
     <div>
       <div className="page-wrapper">
@@ -10,7 +36,7 @@ function Event_Detail() {
           <div class="page-header__bg"></div>
 
           <div class="container">
-            <h2>Events Details</h2>
+            <h2>{data && data.title}</h2>
             <ul class="thm-breadcrumb list-unstyled dynamic-radius">
               <li>
                 <a href="index.html">Home</a>
@@ -29,24 +55,13 @@ function Event_Detail() {
               <div class="col-md-12 col-lg-6">
                 <h3>Help for needy people</h3>
                 <p>
-                  There are many people variation of passages of lorem Ipsum
-                  available in the majority sed do eius tempor incididunt ut
-                  labore et alteration in some. Quuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                  qui dolorem ipsum quiaolor sit amet, consectetur, adipisci
-                  velit, sed quia non numquam eius modi tempora incidunt ut
-                  labore et dolore magnam dolor sit amet, consectetur
-                  adipisicing elit, sed do eiusmod tempor.
+                 {data && data.description}
                 </p>
-                <p>
-                  Minim veniam, quis nostrud exercitation ullamco laboris nisi
-                  ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                  reprehenderit in voluptate velit esse cillum.
-                </p>
+               
               </div>
               <div class="col-md-12 col-lg-6">
                 <img
-                  src="assets/images/events/event-details-1-1.jpg"
+                  src={data && data.image}
                   alt=""
                   class="img-fluid"
                 />
