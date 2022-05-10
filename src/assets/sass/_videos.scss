@@ -1,0 +1,55 @@
+.video {
+  margin: 4rem 0;
+
+  &-catagory {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+
+    @media screen and (max-width: 768px) {
+      display: block;
+    }
+
+    &-item {
+      transition: 0.3s all ease-in-out;
+
+      @media screen and (max-width: 768px) {
+        display: inline-block;
+        margin: 10px;
+      }
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+
+    &-link {
+      background-color: $thm-text-dark;
+      border: none;
+      padding: 7px 20px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+  }
+
+  &-gellary {
+    display: grid;
+    grid-template-columns: 23% 23% 23% 23%;
+    gap: 2%;
+    margin-top: 2rem;
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 48% 48%;
+    }
+
+    @media screen and (max-width: 520px) {
+      grid-template-columns: 100%;
+    }
+
+    &-video {
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

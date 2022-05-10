@@ -1,0 +1,115 @@
+.login {
+  background-color: $thm-text-dark;
+  min-height: 100vh;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  &-wrp {
+    background-color: $thm-black;
+    display: grid;
+    grid-template-columns: 35% 60%;
+    border-radius: 10px;
+
+    @media screen and (max-width: 1024px) {
+      grid-template-columns: 40% 60%;
+    }
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 50% 50%;
+      min-height: 90vh;
+    }
+
+    @media screen and (max-width: 520px) {
+      grid-template-columns: 100%;
+    }
+  }
+
+  &-right {
+    border-right: 1px solid #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+  }
+  .title {
+    text-transform: capitalize;
+    font-size: 2rem;
+    color: #fff;
+  }
+
+  label {
+    display: block;
+    color: #fff;
+    font-size: 1.5rem;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    outline: none;
+    height: 50px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+
+    &::placeholder {
+      color: $thm-text-dark;
+    }
+  }
+
+  button {
+    margin: 20px 0;
+    display: block;
+    width: 100%;
+    height: 50px;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    background-color: $thm-base;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: 0.4s all ease-in-out;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  .new-registation {
+    position: absolute;
+    bottom: 10px;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    // color: $thm-primary;
+  }
+
+  &-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    img {
+      width: 100%;
+    }
+
+    @media screen and (max-width: 520px) {
+      display: none;
+    }
+  }
+}
+
+.login-btn {
+  color: #fff !important;
+  background-color: $thm-base;
+  padding: 0px 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
