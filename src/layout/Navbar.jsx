@@ -3,6 +3,7 @@ import React, { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import Language from "../components/basic/Language";
+import ProfileBtn from "../components/Profile/ProfileBtn";
 import { ThemeContext } from "../context/ThemeContext";
 function Navbar() {
   const ref = useRef();
@@ -38,7 +39,7 @@ function Navbar() {
                 <Link to="/login" className="login-btn">
                   Login
                 </Link>
-              )}
+              ) || <ProfileBtn />}
             </div>
           </div>
         </div>

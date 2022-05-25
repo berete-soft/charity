@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import Values from "../../Values";
 
@@ -7,6 +7,8 @@ export default function Accordion() {
   const context = useContext(ThemeContext);
   const URL = `${Values.BASE_URL}faqs`;
   const [datas, setDatas] = useState([1, 1, 1]);
+  const [id, setId] = useState("")
+
 
   useEffect(() => {
     axios
@@ -21,25 +23,21 @@ export default function Accordion() {
       .catch((e) => console.log(e.response));
   }, [context.language]);
 
-  const ref = useRef();
-
-  useEffect(() => {
-    const btns = document.querySelectorAll("#accordion>li>h2");
-    const items = document.querySelectorAll("#accordion>li");
-
-    for (let i = 0; i < btns.length; i++) {
-      btns[i].addEventListener("click", () => {
-        items[i].classList.toggle("active");
-      });
+    const idHandler=(e)=> {
+      if(e===id) {
+        setId("")
+      }else {
+        setId(e)
+      }
     }
-  });
+
 
   return (
     <ul id="accordion" className=" list-unstyled">
       {datas &&
         datas.map((data, i) => (
-          <li ref={ref} key={i} className="">
-            <h2 className="para-title">
+          <li  key={i} className={`${ id === data.id && "active" || ""}`}>
+            <h2 onClick={e=> idHandler(data.id)} className="para-title">
               <span className="collapsed">
                 <i className="fa fa-plus"></i>
                 {data.title}

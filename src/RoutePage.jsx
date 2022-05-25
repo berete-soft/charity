@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Navigate,
   Route,
-  Routes,
+  Routes
 } from "react-router-dom";
 import About from "./components/About";
 import Causes from "./components/Causes";
@@ -15,6 +15,7 @@ import DonationForm from "./components/form/DonationForm";
 import PaymentForm from "./components/form/PaymentForm";
 import RegistrationForm from "./components/form/RegistrationForm";
 import Home from "./components/Home";
+import Profile from "./components/Profile";
 import Login from "./layout/Login";
 import VideoGellary from "./layout/VideoGellary";
 export default function RoutePage({ isLogin }) {
@@ -39,6 +40,10 @@ export default function RoutePage({ isLogin }) {
           <Route
             path="/login"
             element={!isLogin ? <Login /> : <Navigate to="/" />}
+          ></Route>
+          <Route
+            path="/profile"
+            element={isLogin ? <Profile /> : <Navigate to="/login" />}
           ></Route>
         </Routes>
       </Router>
