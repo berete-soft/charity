@@ -1,6 +1,12 @@
-import { useState } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
 import Footer from "../layout/Footer"
+import Values from '../Values'
 import Header from "./header/Header"
+import Profile1 from "./Profile/Profile1"
+import Profile2 from "./Profile/Profile2"
+import Profile3 from "./Profile/Profile3"
+import Profile4 from "./Profile/Profile4"
 
 
 export default function Profile() {
@@ -25,10 +31,23 @@ export default function Profile() {
     ])
 
     const [id, setId] = useState(1)
+    const [userData, setUserData] = useState(null)
 
     const handler = (e) => {
         setId(e)
     }
+
+    useEffect(()=> {
+        const url = Values.BASE_URL+"profile";
+        const token = localStorage.getItem('loginData')
+        axios.get(url, {headers:{
+            Authorization: `Bearer ${token}`,
+        }}).then(d=>{
+            setUserData(d.data.response)
+        }).catch(e=> confirm.log(e.response))
+    },[])
+
+    
 
 
     return(
@@ -46,8 +65,8 @@ export default function Profile() {
                             </div>
                         </div>
                         <div className="profile-header-right">
-                            <h3 className="">Kshiti Ghelami</h3>
-                            <strong> Web Developer and Designer</strong>
+                            <h3 className="">{userData && userData.user.name}</h3>
+                            <strong>{userData && userData.personal_info.profession}</strong>
                         </div>
                     </div>
 
@@ -56,7 +75,7 @@ export default function Profile() {
                             <ul className="profile-body-left-menu">
                                 {
                                     links.map((data)=> (
-                                        <li key={data} className={`profile-body-left-menu-item ${id === data.id &&  "active" || "" }`}>
+                                        <li key={data.id} className={`profile-body-left-menu-item ${id === data.id &&  "active" || "" }`}>
                                             <button onClick={e=> handler(data.id)} className="profile-body-left-menu-link">{data.name}</button>
                                         </li>
                                     ))
@@ -65,6 +84,10 @@ export default function Profile() {
                             </ul>
                         </div>
                             <div className="profile-body-right">
+                                {id=== 1 &&<Profile1 data={userData && userData.user} /> ||
+                                 id===2 && <Profile2 data={userData && userData.finance} /> ||
+                                  id===3 && <Profile3 data={userData && userData.personal_info} /> ||
+                                   id===4 && <Profile4 data={userData && userData.address}  />}
                                 
                             </div>   
                     </div>             
