@@ -29,12 +29,12 @@ export default function CauseCard({ data }) {
             </div>
           </div>
           <h3>
-            <Link to="/causes_detail">{data.title}</Link>
+            <Link to={`/causes_detail/${data.id}"`}>{data.title}</Link>
           </h3>
-          <p>{data.description}</p>
+          <p>{data.meta_desc}</p>
           <div class="cause-card__bottom">
-            <Link to="/causes_detail" class="thm-btn dynamic-radius">
-              Donate Now
+            <Link to={`/causes_detail/${data.id}"`} class="thm-btn dynamic-radius">
+              Read More
             </Link>
 
             <Link to="#" class="cause-card__share" aria-label="share postr">

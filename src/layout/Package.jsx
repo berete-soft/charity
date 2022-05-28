@@ -24,7 +24,7 @@ export default function Package() {
     <div className="package">
       <div className="row">
         {data.map((d) => (
-          <div className="col-md-6 pb-5">
+          <div key={d.id} className="col-md-6 pb-5">
             <div
               className="price-one__single wow flipInY"
               data-wow-duration="1500ms"

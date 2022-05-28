@@ -49,7 +49,7 @@ function Home() {
                     <p>We’re here to support you every step of the way.</p>
                   </div>
                   <img
-                    src="assets/images/resources/faq-box-1-1.jpg"
+                    src="https://cdn.pixabay.com/photo/2019/04/17/14/54/mosque-4134459_960_720.jpg"
                     alt=""
                     className="float-left"
                   />

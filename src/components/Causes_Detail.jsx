@@ -1,7 +1,33 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ThemeContext } from "../context/ThemeContext";
 import Footer from "../layout/Footer";
+import Values from "../Values";
 import Header from "./header/Header";
+
+
 function Causes_Detail() {
+  const [data, setData] = useState({})
+  const context = useContext(ThemeContext)
+  const id = useParams()
+
+
+    useEffect(()=> {
+      const URL = `${Values.BASE_URL}cause/${id.id}`;
+  
+      axios.get(URL, {
+        headers: {
+          language: context.language,
+        }
+      }).then(d=> {
+        console.log(d.data.response)
+        setData(d.data.response)
+      }).catch(e=> {
+        console.log(e.response)
+      })
+    },[context.language])
+
   return (
     <div>
       <div className="page-wrapper">
@@ -31,76 +57,53 @@ function Causes_Detail() {
                     <div class="cause-card__inner">
                       <div class="cause-card__image">
                         <img
-                          src="assets/images/causes/cause-d-1-1.jpg"
+                          src={data?.image}
                           alt=""
                         />
                       </div>
                       <div class="cause-card__content">
                         <div class="cause-card__top">
-                          <div class="cause-card__progress">
-                            <span
-                              style={{ width: "66%" }}
-                              class="wow cardProgress"
-                              data-wow-duration="1500ms"
-                            >
-                              <b>
-                                <i>66</i>%
-                              </b>
-                            </span>
-                          </div>
+                        <div class="cause-card__progress">
+                          <span
+                            style={{ width: `${(data.raised / data.goal) * 100}%` }}
+                            class="wow cardProgress"
+                            data-wow-duration="1500ms"
+                          >
+                            <b>
+                              <i>{Math.floor((data.raised / data.goal) * 100)}</i>%
+                            </b>
+                          </span>
+                        </div>
                           <div class="cause-card__goals">
                             <p>
-                              <strong>Raised:</strong> $25,270
+                              <strong>Raised:</strong> ${data.raised}
                             </p>
                             <p>
-                              <strong>Goal:</strong> $30,000
+                              <strong>Goal:</strong> ${data.goal}
                             </p>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <h3>Our donation is hope for poor childrens</h3>
+                  <h3>{data.title}</h3>
                   <p>
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered alteration in some
-                    form, by injected humour, or randomised words which don't
-                    look even slightly believable. If you are going to use a
-                    passage of Lorem Ipsum, you need to be sure there isn't
-                    anything embarrassing hidden in the middle of text.{" "}
+                    {data.description}
                   </p>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with
-                    the release of Letraset sheets containing Lorem Ipsum
-                    passages, and more recently with desktop publishing software
-                    like.
-                  </p>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.{" "}
-                  </p>
+                  
                   <div class="cause-card__bottom">
-                    <a href="cause-details.html" class="thm-btn dynamic-radius">
+                    <a href="/" class="thm-btn dynamic-radius">
                       Donate Now
                     </a>
 
-                    <a href="#" class="cause-card__share">
+                    <a href="/" class="cause-card__share">
                       <i class="azino-icon-share"></i>
                     </a>
                   </div>
                   <div class="cause-details__presentations">
                     <i class="fa fa-file-pdf"></i>
                     <h3>Our Presentation</h3>
-                    <a href="#" class="thm-btn dynamic-radius">
+                    <a href="/" class="thm-btn dynamic-radius">
                       Download
                     </a>
                   </div>
