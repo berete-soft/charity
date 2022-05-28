@@ -37,9 +37,9 @@ export default function BlogCard({ data }) {
             <Link to={`/event_detail/${data.id}`} class="thm-btn dynamic-radius">
               Read More
             </Link>
-            <Link to="#" class="cause-card__share" aria-label="share postr">
+            <a href={`https://www.facebook.com/sharer.php?u=https://mandenislamiccenter.com/causes_detail/${data.id}`} class="cause-card__share" aria-label="share postr">
               <i class="azino-icon-share"></i>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

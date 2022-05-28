@@ -24,7 +24,7 @@ export default function Header() {
       >
         <div className="container">
           <div className="logo-box">
-            <Link to="">
+            <Link to="/">
               <img src={logo} width="101" alt="" />
             </Link>
           </div>

@@ -24,6 +24,7 @@ export default function MainSlider() {
       .catch((e) => console.log(e.response));
   }, [context.language]);
 
+
   const settings = {
     dots: false,
     infinite: true,

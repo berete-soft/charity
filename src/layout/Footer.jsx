@@ -1,10 +1,39 @@
-import React from "react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import ReactDOM from "react-dom";
 import logo from "../assets/images/logo.png";
 import ScrollToTop from "../components/basic/ScrollToTop";
+import { ThemeContext } from "../context/ThemeContext";
+import Values from '../Values';
+
+
+
+
+
+
+
+
 function Footer() {
   const year = new Date().getFullYear();
+
+  const[data, setData] = useState({})
+
+  const context = useContext(ThemeContext);
+
+  useEffect(()=> {
+    const url = `${Values.BASE_URL}site_settings`
+
+    axios.get(url, {
+      headers: {
+        language: context.language,
+      },
+    }).then(d=>{
+      setData(d.data.response)
+    }).catch(e=>{
+      console.log(e.response)
+    })
+  },[context.language])
 
   return (
     <div>
@@ -14,9 +43,9 @@ function Footer() {
             <div className="row">
               <div className="col-lg-3 col-md-6 col-sm-12">
                 <div className="footer-widget mb-40 footer-widget__about">
-                  <Link to="{{route('home')}}" aria-label="logo image">
+                  <Link to="/" aria-label="logo image">
                     <img
-                      src={logo}
+                      src={ logo}
                       className="footer-widget__logo"
                       width="101"
                       alt=""
@@ -33,25 +62,25 @@ function Footer() {
                   <h3 className="footer-widget__title">Explore</h3>
                   <ul className="list-unstyled footer-widget__link-list">
                     <li>
-                      <Link to="{{ route('contact')}}">About us</Link>
+                      <Link to="/about">About us</Link>
                     </li>
                     <li>
-                      <Link to="{{ route('events')}}">Upcoming Events</Link>
+                      <Link to="/">Upcoming Events</Link>
                     </li>
                     <li>
-                      <Link to="about.html">Site Map</Link>
+                      <Link to="/">Site Map</Link>
                     </li>
                     <li>
-                      <Link to="{{ route('contact')}}">Help</Link>
+                      <Link to="/}">Help</Link>
                     </li>
                     <li>
-                      <Link to="causes.html">Donate</Link>
+                      <Link to="/donate">Donate</Link>
                     </li>
                     <li>
-                      <Link to="{{ route('contact')}}">Contact us</Link>
+                      <Link to="/contact">Contact us</Link>
                     </li>
                     <li>
-                      <Link to="{{ route('contact')}}">Terms</Link>
+                      <Link to="/">Terms</Link>
                     </li>
                   </ul>
                 </div>
@@ -62,19 +91,18 @@ function Footer() {
                   <ul className="list-unstyled footer-widget__contact">
                     <li>
                       <Link to="#">
-                        <i className="azino-icon-telephone"></i>666 888 0000
+                        <i className="azino-icon-telephone"></i><a href={`tel:${data?.site_phone_one}`}>{data?.site_phone_one}</a>
                       </Link>
                     </li>
                     <li>
-                      <a href="mailto:contact@mandenislamiccenter.com">
+                      <a href={`mailto:${data?.site_email}`}>
                         <i className="azino-icon-email"></i>
-                        contact@mandenislamiccenter.com
+                        {data?.site_email}
                       </a>
                     </li>
                     <li>
                       <Link to="#">
-                        <i className="azino-icon-pin"></i>88 Broklyn Golden
-                        Street, USA
+                        <i className="azino-icon-pin"></i>{data?.site_address}
                       </Link>
                     </li>
                   </ul>
@@ -113,20 +141,20 @@ function Footer() {
         <div className="footer-bottom">
           <div className="container">
             <ScrollToTop />
-            <p>{`© Copyright ${year} Manden Islamic Center.`}</p>
+            <p>{`© Copyright ${year} ${data.site_organization_name}`}</p>
             <div className="footer-social">
-              <Link to="#" aria-label="twitter">
+              <a href={`https://twitter.com/share?url=https://mandenislamiccenter.com/&text=https://mandenislamiccenter.com/&via=[via]&hashtags=[hashtags] `}aria-label="twitter">
                 <i className="fab fa-twitter"></i>
-              </Link>
-              <Link to="#" aria-label="facebook">
+              </a>
+              <a href={`https://www.facebook.com/sharer.php?u=https://mandenislamiccenter.com/`}  aria-label="facebook">
                 <i className="fab fa-facebook-square"></i>
-              </Link>
-              <Link to="#" aria-label="pinterest">
+              </a>
+              <a href={`https://pinterest.com/pin/create/bookmarklet/?media=[post-img]&url=https://mandenislamiccenter.com&is_video=[is_video]&description=https://mandenislamiccenter.com`} aria-label="pinterest">
                 <i className="fab fa-pinterest-p"></i>
-              </Link>
-              <Link to="#" aria-label="instagram">
+              </a>
+              <a href="https://www.instagram.com/?url=https://mandenislamiccenter.com" aria-label="instagram">
                 <i className="fab fa-instagram"></i>
-              </Link>
+              </a>
             </div>
           </div>
         </div>

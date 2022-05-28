@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
 import Footer from "../layout/Footer";
 import Values from "../Values";
@@ -39,7 +39,7 @@ function Event_Detail() {
             <h2>{data && data.title}</h2>
             <ul class="thm-breadcrumb list-unstyled dynamic-radius">
               <li>
-                <a href="index.html">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>-</li>
               <li>

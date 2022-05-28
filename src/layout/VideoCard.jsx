@@ -28,7 +28,7 @@ export default function VideoCard() {
       <div className="container text-center pt-120 pb-120">
         <h3>{data.title}</h3>
         <div className="video-card__btn-block">
-          <Link to="cause-details.html" className="thm-btn dynamic-radius">
+          <Link to={`/donate`} className="thm-btn dynamic-radius">
             {data.button_text}
           </Link>
 

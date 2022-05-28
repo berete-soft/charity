@@ -1,5 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import AboutSection from "../layout/AboutSection";
 import Footer from "../layout/Footer";
+import VideoCard from "../layout/VideoCard";
 import Header from "./header/Header";
 function About() {
   return (
@@ -13,7 +16,7 @@ function About() {
             <h2>About Page</h2>
             <ul class="thm-breadcrumb list-unstyled dynamic-radius">
               <li>
-                <a href="{{route('home')}}">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>-</li>
               <li>
@@ -50,7 +53,6 @@ function About() {
               <div class="row">
                 <div class="col-md-12 col-lg-4">
                   <div class="block-title">
-                    <p>Make a Difference</p>
                     <h3>Let’s help them together.</h3>
                   </div>
                 </div>
@@ -73,54 +75,7 @@ function About() {
           </div>
         </section>
 
-        <section class="about-counter pt-120">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="block-title">
-                  <h3>
-                    Charity for the people <br />
-                    you care about.
-                  </h3>
-                </div>
-                <p class="about-counter__text">
-                  Lorem Ipsum is simply dummy text of the printing and <br />{" "}
-                  typesetting industry. Have you done google research which{" "}
-                  <br /> works all the time.{" "}
-                </p>
-                <ul class="list-unstyled ul-list-one">
-                  <li>Nsectetur cing elit.</li>
-                  <li>Suspe ndisse suscipit sagittis leo.</li>
-                  <li>Entum estibulum dignissim posuere.</li>
-                </ul>
-                <div class="about-counter__count">
-                  <h3 class="odometer" data-count="8860">
-                    00
-                  </h3>
-                  <p>
-                    Donation campaigns <br /> are running
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-6 ">
-                <div class="about-counter__image clearfix">
-                  <div class="about-counter__image-content">
-                    <img
-                      src="assets/images/shapes/about-count-heart-1-1.png"
-                      alt=""
-                    />
-                    <p>We’re here to support you every step of the way.</p>
-                  </div>
-                  <img
-                    src="assets/images/resources/about-counter-1-1.jpg"
-                    alt=""
-                    class="float-left"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+       <AboutSection />
 
         <section class="team-about pb-120 pt-120">
           <div class="container">
@@ -238,30 +193,7 @@ function About() {
             </div>
           </div>
         </section>
-        <section class="video-card">
-          <div class="video-card__bg"></div>
-
-          <div class="container text-center pt-120 pb-120">
-            <p>Help Other People</p>
-            <h3>
-              Our fingerprints on the <br />
-              lives we touch never fade.
-            </h3>
-            <div class="video-card__btn-block">
-              <a href="cause-details.html" class="thm-btn dynamic-radius">
-                Start Donating
-              </a>
-
-              <a
-                href="https://www.youtube.com/watch?v=k0ZvG_917YI"
-                class="video-popup video-card__btn"
-              >
-                <i class="fa fa-play"></i>
-              </a>
-            </div>
-          </div>
-        </section>
-
+        <VideoCard />
         <section class="testimonials-one pt-120 pb-90">
           <div class="container">
             <div class="team-about__top">

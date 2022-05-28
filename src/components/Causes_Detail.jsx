@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
 import Footer from "../layout/Footer";
 import Values from "../Values";
@@ -39,7 +39,7 @@ function Causes_Detail() {
             <h2>Cause Details</h2>
             <ul class="thm-breadcrumb list-unstyled dynamic-radius">
               <li>
-                <a href="{{route('home')}}">Home</a>
+              <Link to="/">Home</Link>
               </li>
               <li>-</li>
               <li>
@@ -92,21 +92,21 @@ function Causes_Detail() {
                   </p>
                   
                   <div class="cause-card__bottom">
-                    <a href="/" class="thm-btn dynamic-radius">
+                    <a href="/donate" class="thm-btn dynamic-radius">
                       Donate Now
                     </a>
 
-                    <a href="/" class="cause-card__share">
+                    <a href={`https://www.facebook.com/sharer.php?u=https://mandenislamiccenter.com/causes_detail/${data.id}`} class="cause-card__share">
                       <i class="azino-icon-share"></i>
                     </a>
                   </div>
-                  <div class="cause-details__presentations">
+                  {/* <div class="cause-details__presentations">
                     <i class="fa fa-file-pdf"></i>
                     <h3>Our Presentation</h3>
                     <a href="/" class="thm-btn dynamic-radius">
                       Download
                     </a>
-                  </div>
+                  </div> */}
                 </div>
                 <h3 class="blog-details__title">Comments</h3>
                 <div class="comment-one">
