@@ -21,6 +21,7 @@ export default function About() {
       .catch((e) => console.log(e.response));
   }, [context.language]);
 
+  
   return (
     <section className="about-two pt-120 pb-120">
       <div className="container">
@@ -30,15 +31,11 @@ export default function About() {
               className="about-two__image wow fadeInLeft"
               data-wow-duration="1500ms"
             >
-              <iframe
-                src={data.video}
-                width="100%"
-                height="440px"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
+              {/* <a href={data?.video_url}>
+                <img src={data.thumbnails && data.thumbnails.hd} alt="" />
+                <span><i class="fa-solid fa-play"></i></span>
+                
+              </a> */}
               {/* <div className="about-two__award">
                 <img src="assets/images/shapes/Linkbout-bag-1-2.png" alt="" />
               </div> */}

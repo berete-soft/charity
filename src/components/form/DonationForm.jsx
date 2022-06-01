@@ -8,6 +8,7 @@ import img5 from "../../assets/images/form/img6.jpg";
 import sliderImg from "../../assets/images/form/slider-img.png";
 import { ThemeContext } from "../../context/ThemeContext";
 import Values from "../../Values";
+import Header from "../header/Header";
 
 export default function DonationForm() {
   const corporateRef = useRef();
@@ -224,6 +225,8 @@ export default function DonationForm() {
   };
 
   return (
+    <>
+    <Header />
     <main className="donation">
       <ToastContainer
         position="top-right"
@@ -690,5 +693,6 @@ export default function DonationForm() {
         </div>
       </div>
     </main>
+    </>
   );
 }

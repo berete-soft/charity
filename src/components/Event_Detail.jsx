@@ -26,6 +26,8 @@ function Event_Detail() {
     })
   },[context.language])
 
+  console.log(data)
+
 
 
   return (

@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from "react";
 // import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
+import { ThemeContext } from '../context/ThemeContext';
 import Footer from "../layout/Footer";
 import Navbar from "../layout/Navbar";
-import CauseCard from "./Card/CauseCard";
 import Values from '../Values';
-import {useContext, useEffect} from 'react';
-import {ThemeContext} from '../context/ThemeContext'
-import axios from 'axios'
+import CauseCard from "./Card/CauseCard";
 
 
 function Causes() {
@@ -40,7 +39,7 @@ function Causes() {
         <div class="stricky-header stricked-menu">
           <div class="container">
             <div class="logo-box">
-              <Link to="{{ route('home')}}">
+              <Link to="/">
                 <img src="assets/images/logo-light.png" width="101" alt="" />
               </Link>
             </div>
@@ -54,7 +53,7 @@ function Causes() {
             <h2>Causes Page</h2>
             <ul class="thm-breadcrumb list-unstyled dynamic-radius">
               <li>
-                <Link to="{{ route('home')}}">Home</Link>
+                <Link to="/">Home</Link>
               </li>
               <li>-</li>
               <li>

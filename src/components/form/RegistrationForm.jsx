@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import logo from "../../assets/images/logo.png";
 import Values from "../../Values";
+import Header from '../header/Header';
 
 export default function RegistrationForm() {
   const [date, setDate] = useState(new Date().toLocaleDateString("en-GB"));
@@ -73,6 +74,7 @@ export default function RegistrationForm() {
       .catch((e) => {
         console.log(e);
       });
+     
 
     // countris api
     const urlCountry = `${Values.BASE_URL}countries`;
@@ -95,7 +97,10 @@ export default function RegistrationForm() {
         })
         .catch((e) => {});
     }
+
+    
   }, [country]);
+
 
   // handler
 
@@ -258,6 +263,8 @@ export default function RegistrationForm() {
   };
 
   return (
+    <>
+    <Header />
     <div className="registration-form">
       <ToastContainer
         position="top-right"
@@ -616,5 +623,6 @@ export default function RegistrationForm() {
 
       <div className="registration-form-footer"></div>
     </div>
+    </>
   );
 }

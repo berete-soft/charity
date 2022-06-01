@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
 export default function CauseCard({ data }) {
+
+  const metaData = data.meta_desc?.length >=100? data.meta_desc.substring(0,100) : data.meta_desc;
+  const raised = data.raised?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  const goal = data.goal?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  
+
   return (
     <div class="cause-card">
       <div class="cause-card__inner">
@@ -21,17 +27,17 @@ export default function CauseCard({ data }) {
             </div>
             <div class="cause-card__goals">
               <p>
-                <strong>Raised:</strong> ${data.raised}
+                <strong>Raised:</strong> ${raised}
               </p>
               <p>
-                <strong>Goal:</strong> ${data.goal}
+                <strong>Goal:</strong> ${goal}
               </p>
             </div>
           </div>
           <h3>
             <Link to={`/causes_detail/${data.id}`}>{data.title}</Link>
           </h3>
-          <p>{data.meta_desc}</p>
+          <p>{metaData}...</p>
           <div class="cause-card__bottom">
             <Link to={`/causes_detail/${data.id}`} class="thm-btn dynamic-radius">
               Read More

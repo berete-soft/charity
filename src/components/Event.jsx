@@ -14,7 +14,7 @@ function Event() {
   const [data, setData] =useState(null)
 
 
-  const url = `${Values.BASE_URL}cause_list`;
+  const url = `${Values.BASE_URL}event_list`;
   const context = useContext(ThemeContext);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function Event() {
             <h2>Events Page</h2>
             <ul class="thm-breadcrumb list-unstyled dynamic-radius">
               <li>
-                <Link to="{{route('home')}}">Home</Link>
+                <Link to="/">Home</Link>
               </li>
               <li>-</li>
               <li>

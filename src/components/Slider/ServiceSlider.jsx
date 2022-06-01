@@ -11,14 +11,14 @@ export default function ServiceSlider() {
     {
       text: "Start Registering",
       title: "Make yourself count in the Community",
-      link: "",
+      link: "/registation",
       icon: icon1,
       bg: "background-primary",
     },
     {
       text: "Start Donating",
       title: "Together We Can Make a Difference",
-      link: "",
+      link: "donate",
       icon: icon2,
       bg: "background-secondary",
     },
@@ -76,12 +76,14 @@ export default function ServiceSlider() {
         <div className="gap">
           <div className={`service-sider-item-wrapper ${data.bg}`}>
             <div className="service-two__box-inner ">
-              <img src={data.icon} width="80" alt="" />
+              <Link to={data.link} >
+                <img src={data.icon} width="80" alt="" />
+              </Link>
               <p>{data.text}</p>
               <h3>
-                <Link to="">{data.title}</Link>
+                <Link to={data.link}>{data.title}</Link>
               </h3>
-              <Link to="contact.html" className="service-two__box-link">
+              <Link to={data.link} className="service-two__box-link">
                 <i className="fa-solid fa-angle-right"></i>
               </Link>
             </div>

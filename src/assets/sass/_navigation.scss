@@ -610,12 +610,13 @@
     top: 0;
     left: 0;
     z-index: 11111;
-    width: 400px;
+    width: 280px;
     height: 100vh;
     background-color: #00000095 !important;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
-    margin-left: -100%;
+    margin-left: -280px;
+    transition: .4s all ease-in-out;
 
     &.active {
       margin-left: 0;

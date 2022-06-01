@@ -22,9 +22,11 @@ export default function VideoCard() {
       .catch((e) => console.log(e.response));
   }, [context.language]);
 
+
   return (
     <section className="video-card">
-      <div className="video-card__bg"></div>
+      <div className="video-card__bg">
+      </div>
       <div className="container text-center pt-120 pb-120">
         <h3>{data.title}</h3>
         <div className="video-card__btn-block">

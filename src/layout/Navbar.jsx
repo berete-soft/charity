@@ -11,9 +11,17 @@ import Values from '../Values';
 
 function Navbar() {
   const ref = useRef();
+  const[isTogole, setIsToggle] = useState(false)
+
   const navHandler = () => {
-    ref.current.classList.toggle("active");
+    if(isTogole=== true){
+      setIsToggle(false)
+    }else {
+      setIsToggle(true)
+    }
   };
+
+
   const[data, setData] = useState({})
 
   const context = useContext(ThemeContext);
@@ -106,7 +114,7 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <nav ref={ref} className="main-menu">
+        <nav className={`main-menu ${isTogole && "active"|| ""}`}>
           <div className="container">
             <ul className="main-menu__list dynamic-radius">
               <li className=" @yield('home_select')">

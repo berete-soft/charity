@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 export default function BlogCard({ data }) {
+
+  const metaData = data.meta_desc?.length >=100? data.meta_desc.substring(0,100) : data.meta_desc;
   return (
     <div class="blog-card">
       <div class="blog-card__inner">
@@ -31,7 +33,7 @@ export default function BlogCard({ data }) {
             </p>
           </div>
 
-          <p>{data.meta_desc}</p>
+          <p>{metaData}...</p>
 
           <div class="cause-card__bottom_event">
             <Link to={`/event_detail/${data.id}`} class="thm-btn dynamic-radius">

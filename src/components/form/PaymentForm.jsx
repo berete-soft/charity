@@ -1,15 +1,13 @@
 import axios from "axios";
-import { useEffect, useState, useRef, useContext } from "react";
-import { BsFillCalendarFill } from "react-icons/bs";
-import { FaBox, FaRegCreditCard, FaUserAlt } from "react-icons/fa";
+import { useContext, useEffect, useState } from "react";
+import { FaRegCreditCard, FaUserAlt } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 import img1 from "../../assets/images/form/img2.png";
-import img2 from "../../assets/images/form/img3.jpg";
-import img3 from "../../assets/images/form/img4.png";
 import img4 from "../../assets/images/form/img5.png";
 import img5 from "../../assets/images/form/img6.jpg";
 import { ThemeContext } from "../../context/ThemeContext";
 import Values from "../../Values";
-import { toast, ToastContainer } from "react-toastify";
+import Header from "../header/Header";
 
 export default function PaymentForm() {
   const [data, setData] = useState()
@@ -164,6 +162,8 @@ export default function PaymentForm() {
   
 
   return (
+    <>
+    <Header />
     <div className="payment">
       <ToastContainer
         position="top-right"
@@ -430,5 +430,6 @@ export default function PaymentForm() {
         </div>
       </div>
     </div>
+    </>
   );
 }
