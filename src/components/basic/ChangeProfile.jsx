@@ -37,9 +37,6 @@ export default function ChangeProfile({data}) {
         const URL = `${Values.BASE_URL}profile-picture-update`
         const token = localStorage.getItem("loginData");
 
-        
-        
-        console.log(picture)
         if(file) {
             axios.post(URL, picture, {
                 headers: {
@@ -48,7 +45,6 @@ export default function ChangeProfile({data}) {
             }).then(d=>{
                 data.closeHandler()
             }).catch(e=>{
-                console.log(URL)
                 console.log(e.response)
             })
         }else{

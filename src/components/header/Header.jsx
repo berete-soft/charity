@@ -8,10 +8,10 @@ export default function Header() {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY >= 300) {
-        ref.current.style.transform = "translateY(0)";
+       {ref.current&&  (ref.current.style.transform = "translateY(0)");}
       }
       if (window.scrollY <= 300) {
-        ref.current.style.transform = "translateY(-110%)";
+        {ref.current&& (ref.current.style.transform = "translateY(-110%)")}
       }
     });
   });

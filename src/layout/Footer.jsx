@@ -113,10 +113,9 @@ function Footer() {
                   <h3 className="footer-widget__title">Newletter</h3>
                   <p>Signup now to get daily latest news & updates from us</p>
                   <form
-                    data-url="https://xyz.us18.list-manage.com/subscribe/post?u=20e91746ef818cd941998c598&id=cc0ee8140e"
                     className="footer-widget__newsletter-form mc-form"
                   >
-                    <label for="mc-email" className="sr-only">
+                    <label htmlFor="mc-email" className="sr-only">
                       Email Address
                     </label>
                     <input
