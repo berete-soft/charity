@@ -1,12 +1,11 @@
 import React from "react";
-// import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
 import About from "../layout/About";
 import AboutSection from "../layout/AboutSection";
 import Cause from "../layout/Cause";
 import Footer from "../layout/Footer";
 import Package from "../layout/Package";
 import VideoCard from "../layout/VideoCard";
+import Stats from "./basic/Stats";
 import Header from "./header/Header";
 import BlogSlider from "./Slider/BlogSlider";
 import LogoSlider from "./Slider/LogoSlider";
@@ -30,40 +29,7 @@ function Home() {
         <Cause />
         <AboutSection />
 
-        <section className="fact-counter">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 col-lg-3 text-center">
-                <h3 className="odometer" data-count="8860">
-                  00
-                </h3>
-                <p>Fund Raised</p>
-                <Link to="#">+</Link>
-              </div>
-              <div className="col-md-6 col-lg-3 text-center">
-                <h3 className="odometer" data-count="456">
-                  00
-                </h3>
-                <p>Fund Raised</p>
-                <Link to="#">+</Link>
-              </div>
-              <div className="col-md-6 col-lg-3 text-center">
-                <h3 className="odometer" data-count="6208">
-                  00
-                </h3>
-                <p>Fund Raised</p>
-                <Link to="#">+</Link>
-              </div>
-              <div className="col-md-6 col-lg-3 text-center">
-                <h3 className="odometer" data-count="960">
-                  00
-                </h3>
-                <p>Fund Raised</p>
-                <Link to="#">+</Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Stats />
 
         <section className="price-one">
           <div className="container">

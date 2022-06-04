@@ -45,6 +45,7 @@ export default function RoutePage({ isLogin }) {
             path="/profile"
             element={isLogin ? <Profile /> : <Navigate to="/login" />}
           ></Route>
+           
         </Routes>
       </Router>
     </div>

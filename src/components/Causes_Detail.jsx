@@ -26,6 +26,8 @@ function Causes_Detail() {
       }).catch(e=> {
         console.log(e.response)
       })
+
+      
     },[context.language])
 
   return (

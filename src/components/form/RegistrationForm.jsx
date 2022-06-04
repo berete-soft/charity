@@ -60,7 +60,7 @@ export default function RegistrationForm() {
 
   const [countryList, setCountryList] = useState([]);
   const [stateList, setStateList] = useState([]);
-  const religionList = ["muslim", "hindu"];
+  const religionList = ["Muslim", "Christian","Jews", "Hindu", "Others"];
 
   const [data, setData] = useState({});
 
