@@ -84,7 +84,7 @@ export default function Login() {
         <div className="container">
           <div className="login-wrp">
             <div className="login-right">
-              <p className="title">Meden Islamic Center</p>
+              <p className="title">Menden Islamic Center</p>
               <form action="" onSubmit={(e) => submitHandler(e)}>
                 <div className="input-group">
                   <label htmlFor="email">Email:</label>
@@ -98,7 +98,7 @@ export default function Login() {
                   />
                 </div>
                 <div className="input-group">
-                  <label htmlFor="passwaord">Passwaord:</label>
+                  <label htmlFor="passwaord">Password:</label>
                   <input
                     type="password"
                     placeholder="Enter password"

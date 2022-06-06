@@ -331,35 +331,9 @@ export default function RegistrationForm() {
               <div className="group-title">
                 <h2>User Details</h2>
               </div>
+              
               <div className="input-grid">
-                <select
-                  type="text"
-                  name="countris"
-                  onChange={(e) => countryHandler(e)}
-                >
-                  <option> -- Select Country -- </option>
-                  {countryList.map((countri, i) => (
-                    <option key={i} value={countri}>
-                      {" "}
-                      {countri}{" "}
-                    </option>
-                  ))}
-                </select>
-                <select
-                  type="text"
-                  name="name"
-                  onChange={(e) => stateHandler(e)}
-                >
-                  <option> -- Select State -- </option>
-                  {stateList.map((d, i) => (
-                    <option value={d.id} key={i}>
-                      {d.name}{" "}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="input-grid">
+                <div className="input-item">
                 <input
                   type="text"
                   name="setFirstName"
@@ -367,6 +341,10 @@ export default function RegistrationForm() {
                   value={firstName}
                   onChange={(e) => firstNameHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
+                
+                <div className="input-item">
                 <input
                   type="text"
                   name="lastName"
@@ -374,16 +352,24 @@ export default function RegistrationForm() {
                   value={lastName}
                   onChange={(e) => lastNameHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
               </div>
 
               <div className="input-grid">
+              <div className="input-item error">
                 <input
-                  type="text"
+                  type="tel"
                   name="name"
                   placeholder="Phone"
                   value={phone}
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                   onChange={(e) => phoneHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
+
+                <div className="input-item">
                 <input
                   type="email"
                   name="email"
@@ -391,8 +377,12 @@ export default function RegistrationForm() {
                   value={email}
                   onChange={(e) => emailHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
               </div>
               <div className="input-grid">
+
+              <div className="input-item">
                 <input
                   type="text"
                   name="releated"
@@ -400,6 +390,10 @@ export default function RegistrationForm() {
                   value={releated}
                   onChange={(e) => releatedHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
+
+                <div className="input-item">
                 <input
                   type="password"
                   name="password"
@@ -407,6 +401,8 @@ export default function RegistrationForm() {
                   value={password}
                   onChange={(e) => passwordHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
               </div>
             </div>
 
@@ -466,6 +462,7 @@ export default function RegistrationForm() {
               </div>
 
               <div className="input-grid">
+              <div className="input-item">
                 <input
                   type="text"
                   name="name"
@@ -473,6 +470,10 @@ export default function RegistrationForm() {
                   value={fatherName}
                   onChange={(e) => fatherNameHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
+
+                <div className="input-item">
                 <input
                   type="text"
                   name="lastName"
@@ -480,8 +481,12 @@ export default function RegistrationForm() {
                   value={motherName}
                   onChange={(e) => motherNameHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
               </div>
               <div className="input-grid">
+
+              <div className="input-item">
                 <input
                   type="text"
                   name="name"
@@ -489,6 +494,10 @@ export default function RegistrationForm() {
                   value={nationality}
                   onChange={(e) => nationalityHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
+
+                <div className="input-item">
                 <select
                   type="text"
                   name="name"
@@ -502,6 +511,9 @@ export default function RegistrationForm() {
                     </option>
                   ))}
                 </select>
+                <span className="">The given data is invalit</span>
+                </div>   
+
               </div>
 
               <div className="radio-wrp">
@@ -528,40 +540,9 @@ export default function RegistrationForm() {
                 </div>
               </div>
 
-              {/* <div className="input-grid">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="National ID No."
-                  value={nationalID}
-                  onChange={(e) => nationalIdHandler(e)}
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Driving License No."
-                  value={drivingLicense}
-                  onChange={(e) => drivingLicenseHandler(e)}
-                />
-              </div>
-
+             
               <div className="input-grid">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Tin No."
-                  value={tinNo}
-                  onChange={(e) => tinNoHandler(e)}
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Passport No."
-                  value={passportNo}
-                  onChange={(e) => passportNoHandler(e)}
-                />
-              </div> */}
-              <div className="input-grid">
+              <div className="input-item">
                 <input
                   type="text"
                   name="name"
@@ -569,6 +550,8 @@ export default function RegistrationForm() {
                   value={profession}
                   onChange={(e) => professionHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
                 {/* <input type="text" style={{ opacity: "0" }} /> */}
               </div>
             </div>
@@ -578,6 +561,7 @@ export default function RegistrationForm() {
                 <h2>CONTACT DETAILS</h2>
               </div>
               <div className="input-grid">
+              <div className="input-item">
                 <input
                   type="text"
                   name="name"
@@ -585,9 +569,12 @@ export default function RegistrationForm() {
                   value={presentAddress}
                   onChange={(e) => presentAddressHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
               </div>
 
               <div className="input-grid">
+              <div className="input-item">
                 <input
                   type="text"
                   name="name"
@@ -595,6 +582,9 @@ export default function RegistrationForm() {
                   value={city}
                   onChange={(e) => cityHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
+                <div className="input-item">
                 <input
                   type="text"
                   name="name"
@@ -602,7 +592,45 @@ export default function RegistrationForm() {
                   value={postalCode}
                   onChange={(e) => postalCodeHandler(e)}
                 />
+                <span className="">The given data is invalit</span>
+                </div>
               </div>
+              <div className="input-grid">
+              <div className="input-item">
+                <select
+                  type="text"
+                  name="countris"
+                  onChange={(e) => countryHandler(e)}
+                >
+                  <option> -- Select Country -- </option>
+                  {countryList.map((countri, i) => (
+                    <option key={i} value={countri}>
+                      {" "}
+                      {countri}{" "}
+                    </option>
+                  ))}
+                </select>
+                <span className="">The given data is invalit</span>
+                </div>
+
+                <div className="input-item">
+                <select
+                  type="text"
+                  name="name"
+                  onChange={(e) => stateHandler(e)}
+                >
+                  <option> -- Select State -- </option>
+                  {stateList.map((d, i) => (
+                    <option value={d.id} key={i}>
+                      {d.name}{" "}
+                    </option>
+                  ))}
+                </select>
+                <span className="">The given data is invalit</span>
+                </div>
+
+              </div>
+
             </div>
 
             <div className="notic">

@@ -125,7 +125,9 @@
       .radio-group {
         padding: 0 15px;
         // width: 100px;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
 
         @media screen and (max-width: $xs) {
           display: block;
@@ -142,6 +144,9 @@
           visibility: hidden;
           position: relative;
           cursor: pointer;
+          -moz-appearance:initial;
+          
+          
 
           &::after {
             content: "";
@@ -149,7 +154,7 @@
             height: 20px;
             border: 4px solid #7f8482;
             position: absolute;
-            top: 50%;
+            top: 20%;
             left: 5px;
             transform: translate(-50%, -50%);
             visibility: visible;
@@ -162,14 +167,17 @@
             height: 15px;
             background-color: #43c7f0;
             position: absolute;
-            top: 50%;
+            top: 20%;
             left: 5px;
             transform: translate(-50%, -50%);
             border-radius: 0;
           }
 
-          &:checked::before {
-            visibility: visible;
+          &:checked {
+
+            &::before {
+              visibility: visible;
+            }
           }
         }
       }
@@ -206,6 +214,35 @@
 
         @media screen and (max-width: $xs) {
           flex-direction: column;
+        }
+        
+        .input-item {
+
+          width: 100%;
+          position: relative;
+          padding-bottom: 5px;
+          span {
+            display: none;
+          }
+        } 
+
+        .input-item.error {
+          
+          
+          span {
+            color: rgb(126, 22, 22);
+            font-size: 10px;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: -12px;
+            display: block;
+          }
+
+          input, select {
+            color: rgb(126, 22, 22);
+            border-color: rgb(126, 22, 22);
+          }
         }
 
         input {

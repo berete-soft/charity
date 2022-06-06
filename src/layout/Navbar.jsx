@@ -127,14 +127,14 @@ function Navbar() {
                 <Link to="/causes">Causes</Link>
               </li>
               <li className=" ">
-                <Link to="/about">About us</Link>
-              </li>
-              <li className=" ">
                 <Link to="/videos">Videos</Link>
               </li>
 
               <li className="  ">
                 <Link to="/contact">Contact</Link>
+              </li>
+              <li className=" ">
+                <Link to="/about">About</Link>
               </li>
               <li className="search-btn search-toggler">
                 <a href="#">
