@@ -84,11 +84,10 @@
   }
 
   .new-registation {
-    position: absolute;
-    bottom: 10px;
+    padding-left: 10px;
     font-size: 1.1rem;
     text-transform: capitalize;
-    // color: $thm-primary;
+    color: $thm-primary;
   }
 
   &-left {

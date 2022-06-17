@@ -8,6 +8,10 @@ import Header from '../header/Header';
 
 export default function RegistrationForm() {
   const [date, setDate] = useState(new Date().toLocaleDateString("en-GB"));
+  const [errors, setErrors] = useState({})
+
+
+  
 
   const tostSuccess = (message) => {
     toast.success(`${message}`, {
@@ -98,6 +102,10 @@ export default function RegistrationForm() {
         .catch((e) => {});
     }
 
+
+    // errors handler
+
+
     
   }, [country]);
 
@@ -112,38 +120,86 @@ export default function RegistrationForm() {
 
   const stateHandler = (e) => {
     setState(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("state")!== -1){
+      delete errors["state"]
+    }
   };
   const countryHandler = (e) => {
     setCountry(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("country")!== -1){
+      delete errors["country"]
+
+    }
   };
 
   const firstNameHandler = (e) => {
     setFirstName(e.target.value);
+    if(Object.keys(errors).indexOf("first_name")!== -1){
+      delete errors["first_name"]
+
+    }
   };
   const lastNameHandler = (e) => {
     setLastName(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("last_name")!== -1){
+      delete errors["last_name"]
+
+    }
   };
 
   const phoneHandler = (e) => {
-    setPhone(e.target.value);
+    // format
+    const formatedPhoneNumver = formatPhoneNumber(e.target.value);
+    setPhone(formatedPhoneNumver);
+
+    // errors
+    if(Object.keys(errors).indexOf("phone")!== -1){
+      delete errors["phone"]
+    }
   };
 
   const emailHandler = (e) => {
     setEmail(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("email")!== -1){
+      delete errors["email"]
+    }
   };
 
   const releatedHandler = (e) => {
     setReleated(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("releated")!== -1){
+      delete errors["releated"]
+    }
   };
 
   const passwordHandler = (e) => {
     setPassword(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("password")!== -1){
+      delete errors["password"]
+    }
   };
 
   // for personal Information
 
   const genderHandler = (e) => {
     setGender(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("gender")!== -1){
+      delete errors["gender"]
+    }
   };
   const adultHandler = (e) => {
     if (e.target.value === "yes") {
@@ -151,43 +207,93 @@ export default function RegistrationForm() {
     } else {
       setAdult(false);
     }
+
+    // errors
+    if(Object.keys(errors).indexOf("adult")!== -1){
+      delete errors["adult"]
+    }
   };
 
   const fatherNameHandler = (e) => {
     setFatherName(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("father_name")!== -1){
+      delete errors["father_name"]
+    }
   };
 
   const motherNameHandler = (e) => {
     setMotherName(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("mother_name")!== -1){
+      delete errors["mother_name"]
+    }
   };
 
   const nationalityHandler = (e) => {
     setNationality(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("nationality")!== -1){
+      delete errors["nationality"]
+    }
   };
 
   const religionHandler = (e) => {
     setReligion(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("religion")!== -1){
+      delete errors["religion"]
+    }
   };
 
   const maritalStateHandler = (e) => {
     setMaritalState(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("martial_status")!== -1){
+      delete errors["martial_status"]
+    }
   };
   const professionHandler = (e) => {
     setProfession(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("profession")!== -1){
+      delete errors["profession"]
+    }
   };
 
   // for contact details
 
   const presentAddressHandler = (e) => {
     setPresentAddress(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("present_address")!== -1){
+      delete errors["present_address"]
+    }
   };
 
   const cityHandler = (e) => {
     setCity(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("city")!== -1){
+      delete errors["city"]
+    }
   };
 
   const postalCodeHandler = (e) => {
     setPostalCode(e.target.value);
+
+    // errors
+    if(Object.keys(errors).indexOf("postal_code")!== -1){
+      delete errors["postal_code"]
+    }
   };
 
   // data handler
@@ -233,7 +339,7 @@ export default function RegistrationForm() {
         // alert(d.data.message)
       })
       .catch((e) => {
-        console.log(e.response);
+        setErrors(e.response.data.errors);
         tostError(e.response.data.message);
         // alert("Please fill up all fields");
       });
@@ -261,6 +367,23 @@ export default function RegistrationForm() {
       dataHandler();
     }
   };
+
+
+ const formatPhoneNumber=(value) => {
+   if(!value) return value;
+   const phoneNumber = value.replace(/[^\d]/g, '');
+   const phoneNumberLenght = phoneNumber.length;
+
+   if(phoneNumberLenght < 4) return phoneNumber;
+
+   if(phoneNumberLenght < 7) {
+     return`(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`
+   }
+
+   return`(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3,6)}-${phoneNumber.slice(6, 10)}`
+ }
+
+
 
   return (
     <>
@@ -333,7 +456,7 @@ export default function RegistrationForm() {
               </div>
               
               <div className="input-grid">
-                <div className="input-item">
+                <div className={`input-item ${Object.keys(errors).indexOf("first_name")!== -1 && "error"|| ""}`}>
                 <input
                   type="text"
                   name="setFirstName"
@@ -341,10 +464,10 @@ export default function RegistrationForm() {
                   value={firstName}
                   onChange={(e) => firstNameHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("first_name")!== -1 && errors.first_name[0]}</span>
                 </div>
                 
-                <div className="input-item">
+                <div className={`input-item ${Object.keys(errors).indexOf("last_name")!== -1 && "error"|| ""}`}>
                 <input
                   type="text"
                   name="lastName"
@@ -352,24 +475,24 @@ export default function RegistrationForm() {
                   value={lastName}
                   onChange={(e) => lastNameHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("last_name")!== -1 && errors.last_name[0]}</span>
                 </div>
               </div>
 
               <div className="input-grid">
-              <div className="input-item error">
+              <div className={`input-item ${Object.keys(errors).indexOf("phone")!== -1 && "error"|| ""}`}>
                 <input
+                  id="phone"
                   type="tel"
                   name="name"
                   placeholder="Phone"
                   value={phone}
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                   onChange={(e) => phoneHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("phone")!== -1 && errors.phone[0]}</span>
                 </div>
 
-                <div className="input-item">
+                <div className={`input-item ${Object.keys(errors).indexOf("email")!== -1 && "error"|| ""}`}>
                 <input
                   type="email"
                   name="email"
@@ -377,12 +500,12 @@ export default function RegistrationForm() {
                   value={email}
                   onChange={(e) => emailHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">T{Object.keys(errors).indexOf("email")!== -1 && errors.email[0]}</span>
                 </div>
               </div>
               <div className="input-grid">
 
-              <div className="input-item">
+              <div className={`input-item ${Object.keys(errors).indexOf("releated")!== -1 && "error"|| ""}`}>
                 <input
                   type="text"
                   name="releated"
@@ -390,10 +513,10 @@ export default function RegistrationForm() {
                   value={releated}
                   onChange={(e) => releatedHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("releated")!== -1 && errors.releated[0]}</span>
                 </div>
 
-                <div className="input-item">
+                <div className={`input-item ${Object.keys(errors).indexOf("password")!== -1 && "error"|| ""}`}>
                 <input
                   type="password"
                   name="password"
@@ -401,7 +524,7 @@ export default function RegistrationForm() {
                   value={password}
                   onChange={(e) => passwordHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("password")!== -1 && errors.password[0]}</span>
                 </div>
               </div>
             </div>
@@ -414,6 +537,7 @@ export default function RegistrationForm() {
               </div>
 
               <div className="radio-wrp">
+              <div className={`input-item ${Object.keys(errors).indexOf("gender")!== -1 && "error"|| ""}`}>
                 <span>Gender:</span>
                 <div className="radio-group">
                   <label htmlFor="male">Male</label>
@@ -435,9 +559,12 @@ export default function RegistrationForm() {
                     onChange={(e) => genderHandler(e)}
                   />
                 </div>
+                <span className="error-message">{Object.keys(errors).indexOf("gender")!== -1 && errors.gender[0]}</span>
+                </div>
               </div>
 
               <div className="radio-wrp">
+              <div className={`input-item ${Object.keys(errors).indexOf("adult")!== -1 && "error"|| ""}`}>
                 <span>Are you adult?</span>
                 <div className="radio-group">
                   <label htmlFor="on18">Yes</label>
@@ -459,10 +586,12 @@ export default function RegistrationForm() {
                     onChange={(e) => adultHandler(e)}
                   />
                 </div>
+                <span className="error-message">{Object.keys(errors).indexOf("adult")!== -1 && errors.adult[0]}</span>
+                </div>
               </div>
 
               <div className="input-grid">
-              <div className="input-item">
+              <div className={`input-item ${Object.keys(errors).indexOf("father_name")!== -1 && "error"|| ""}`}>
                 <input
                   type="text"
                   name="name"
@@ -470,10 +599,10 @@ export default function RegistrationForm() {
                   value={fatherName}
                   onChange={(e) => fatherNameHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("father_name")!== -1 && errors.father_name[0]}</span>
                 </div>
 
-                <div className="input-item">
+                <div className={`input-item ${Object.keys(errors).indexOf("mother_name")!== -1 && "error"|| ""}`}>
                 <input
                   type="text"
                   name="lastName"
@@ -481,12 +610,12 @@ export default function RegistrationForm() {
                   value={motherName}
                   onChange={(e) => motherNameHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("mother_name")!== -1 && errors.mother_name[0]}</span>
                 </div>
               </div>
               <div className="input-grid">
 
-              <div className="input-item">
+              <div className={`input-item ${Object.keys(errors).indexOf("nationality")!== -1 && "error"|| ""}`}>
                 <input
                   type="text"
                   name="name"
@@ -494,10 +623,10 @@ export default function RegistrationForm() {
                   value={nationality}
                   onChange={(e) => nationalityHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("nationality")!== -1 && errors.nationality[0]}</span>
                 </div>
 
-                <div className="input-item">
+                <div className={`input-item ${Object.keys(errors).indexOf("religion")!== -1 && "error"|| ""}`}>
                 <select
                   type="text"
                   name="name"
@@ -511,12 +640,13 @@ export default function RegistrationForm() {
                     </option>
                   ))}
                 </select>
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("religion")!== -1 && errors.religion[0]}</span>
                 </div>   
 
               </div>
 
               <div className="radio-wrp">
+              <div className={`input-item ${Object.keys(errors).indexOf("martial_status")!== -1 && "error"|| ""}`}>
                 <span>Marital Status:</span>
                 <div className="radio-group">
                   <label htmlFor="Married">Married</label>
@@ -538,11 +668,13 @@ export default function RegistrationForm() {
                     onChange={(e) => maritalStateHandler(e)}
                   />
                 </div>
+                <span className="error-message">{Object.keys(errors).indexOf("martial_status")!== -1 && errors.martial_status[0]}</span>
+                </div>
               </div>
 
              
               <div className="input-grid">
-              <div className="input-item">
+              <div className={`input-item ${Object.keys(errors).indexOf("profession")!== -1 && "error"|| ""}`}>
                 <input
                   type="text"
                   name="name"
@@ -550,7 +682,7 @@ export default function RegistrationForm() {
                   value={profession}
                   onChange={(e) => professionHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">T{Object.keys(errors).indexOf("profession")!== -1 && errors.profession[0]}</span>
                 </div>
                 {/* <input type="text" style={{ opacity: "0" }} /> */}
               </div>
@@ -561,7 +693,7 @@ export default function RegistrationForm() {
                 <h2>CONTACT DETAILS</h2>
               </div>
               <div className="input-grid">
-              <div className="input-item">
+              <div className={`input-item ${Object.keys(errors).indexOf("present_address")!== -1 && "error"|| ""}`}>
                 <input
                   type="text"
                   name="name"
@@ -569,12 +701,12 @@ export default function RegistrationForm() {
                   value={presentAddress}
                   onChange={(e) => presentAddressHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("present_address")!== -1 && errors.present_address[0]}</span>
                 </div>
               </div>
 
               <div className="input-grid">
-              <div className="input-item">
+              <div className={`input-item ${Object.keys(errors).indexOf("city")!== -1 && "error"|| ""}`}>
                 <input
                   type="text"
                   name="name"
@@ -582,9 +714,9 @@ export default function RegistrationForm() {
                   value={city}
                   onChange={(e) => cityHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">T{Object.keys(errors).indexOf("city")!== -1 && errors.city[0]}</span>
                 </div>
-                <div className="input-item">
+                <div className={`input-item ${Object.keys(errors).indexOf("postal_code")!== -1 && "error"|| ""}`}>
                 <input
                   type="text"
                   name="name"
@@ -592,11 +724,11 @@ export default function RegistrationForm() {
                   value={postalCode}
                   onChange={(e) => postalCodeHandler(e)}
                 />
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("postal_code")!== -1 && errors.postal_code[0]}</span>
                 </div>
               </div>
               <div className="input-grid">
-              <div className="input-item">
+              <div className={`input-item ${Object.keys(errors).indexOf("country")!== -1 && "error"|| ""}`}>
                 <select
                   type="text"
                   name="countris"
@@ -610,10 +742,10 @@ export default function RegistrationForm() {
                     </option>
                   ))}
                 </select>
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("country")!== -1 && errors.country[0]}</span>
                 </div>
 
-                <div className="input-item">
+                <div className={`input-item ${Object.keys(errors).indexOf("state")!== -1 && "error"|| ""}`}>
                 <select
                   type="text"
                   name="name"
@@ -626,7 +758,7 @@ export default function RegistrationForm() {
                     </option>
                   ))}
                 </select>
-                <span className="">The given data is invalit</span>
+                <span className="">{Object.keys(errors).indexOf("state")!== -1 && errors.state[0]}</span>
                 </div>
 
               </div>

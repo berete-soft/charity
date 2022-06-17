@@ -84,7 +84,7 @@ export default function Login() {
         <div className="container">
           <div className="login-wrp">
             <div className="login-right">
-              <p className="title">Menden Islamic Center</p>
+              <p className="title">Manden Islamic Center</p>
               <form action="" onSubmit={(e) => submitHandler(e)}>
                 <div className="input-group">
                   <label htmlFor="email">Email:</label>
@@ -110,9 +110,13 @@ export default function Login() {
                 </div>
                 <button type="subimt">Login</button>
               </form>
-              <Link to="/registation" className="new-registation">
-                new registration
+              <div className="new-register">
+                <span>Don't have an Account? 
+                <Link to="/registation" className="new-registation">
+                Register
               </Link>
+                </span>
+              </div>
             </div>
             <div className="login-left">
               <Link to="/">
