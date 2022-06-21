@@ -55,13 +55,6 @@ export default function PaymentForm() {
       draggable: true,
     });
   };
-
- 
-
-  
-
-
-
   // handler
 
   // payment system
@@ -84,6 +77,7 @@ export default function PaymentForm() {
 
 
   const [amount, setAmount] = useState("");
+  const [paymentInfo, setPaymentInfo] = useState([]);
   const [reason, setReason] = useState("");
   const [transactionNumBank, setTransactionNumBank] = useState("");
   const [transactionNumZelle, setTransactionNumZelle] = useState("");
@@ -149,16 +143,31 @@ export default function PaymentForm() {
         },
       })
       .then((d) => {
-        // tostSuccess(d.data.message);
-        tostSuccess("successfully");
+        if(d.data.method === '0'){
+          window.location.href = `${Values.BASE_URL}payment/process-stripe/${d.data.payment_id}`;
+        } else if(d.data.method === '5'){
+          window.location.href = `${Values.BASE_URL}payment/process-paypal/${d.data.payment_id}`;
+        } else{
+          tostSuccess(d.data.message);
+          location.reload();
+        }
+        // tostSuccess("successfully");
 
-        // location.reload();
+        
       })
       .catch((e) => {
         tostError(e.response.data.message);
         console.log(e.response.data.message)
       });
   };
+    const getPaymentInfo = async() => {
+      const res =  await axios.get(`${Values.BASE_URL}get/paymentinfo`);
+      setPaymentInfo(res.data);
+    }
+
+    useEffect(() => {
+      getPaymentInfo();
+    }, []);
   
 
   return (
@@ -180,7 +189,7 @@ export default function PaymentForm() {
         <div className="container">
           <div className="payment-header-card">
             <div className="payment-header-card-left">
-              <p>Total Dye Amount</p>
+              <p>Total Due Amount</p>
               <h2>${data && data.finance.due}</h2>
             </div>
             <ul className="payment-header-card-right">
@@ -393,6 +402,44 @@ export default function PaymentForm() {
                   <div className="right"></div>
                 </div>
               </div>
+              {paymentInfo.is_stripe === '1' && (
+                <div className="payment-body-left-card-wrp">
+                <div className="payment-body-left-card">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="payment"
+                      id="stripe"
+                      className="payment-type"
+                      value="0"
+                    />
+                    <label htmlFor="stripe">Stripe</label>
+                  </div>
+                  <div className="img">
+                    <img width="100" src="../../assets/images/credit-card.png" alt="" />
+                  </div>
+                </div>
+              </div>
+              )}
+              {paymentInfo.is_paypal == '1' && (
+                <div className="payment-body-left-card-wrp">
+                <div className="payment-body-left-card">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="payment"
+                      id="paypal"
+                      className="payment-type"
+                      value="5"
+                    />
+                    <label htmlFor="paypal">Paypal</label>
+                  </div>
+                  <div className="img">
+                    <img width="100" src="../../assets/images/paypal.png" alt="" />
+                  </div>
+                </div>
+                </div>
+              )}
 
               <button type="submit">Make Payment</button>
             </form>

@@ -164,6 +164,9 @@ export default function DonationForm() {
   const [reciverName, setReciverName] = useState("");
   const [reciverPhone, setReciverPhone] = useState("");
 
+  
+  const [paymentInfo, setPaymentInfo] = useState([]);
+
   // transaction handler
   const transactionNumBankHandler = (e) => {
     setTransactionNumBank(e.target.value);
@@ -215,14 +218,27 @@ export default function DonationForm() {
     axios
       .post(POSTURL, data)
       .then((d) => {
-        tostSuccess(d.data.message);
-
-        location.reload();
+        if(paymentMethod === 'stripe'){
+          window.location.href = `${Values.BASE_URL}payment/process-stripe/${d.data.payment_id}`;
+        } else if(paymentMethod === 'paypal'){
+          window.location.href = `${Values.BASE_URL}payment/process-paypal/${d.data.payment_id}`;
+        } else{
+          tostSuccess(d.data.message);
+          location.reload();
+        }
       })
       .catch((e) => {
         tostError(e.response.data.message);
       });
   };
+  const getPaymentInfo = async() => {
+    const res =  await axios.get(`${Values.BASE_URL}get/paymentinfo`);
+    setPaymentInfo(res.data);
+  }
+
+  useEffect(() => {
+    getPaymentInfo();
+  }, []);
 
   return (
     <>
@@ -686,7 +702,44 @@ export default function DonationForm() {
                   <div className="right"></div>
                 </div>
               </div>
-
+              {paymentInfo.is_stripe == '1' && (
+                <div className="payment-body-left-card-wrp">
+                <div className="payment-body-left-card">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="payment"
+                      id="stripe"
+                      className="payment-type"
+                      value="stripe"
+                    />
+                    <label htmlFor="stripe">Stripe</label>
+                  </div>
+                  <div className="img">
+                    <img width="100" src="../../assets/images/credit-card.png" alt="" />
+                  </div>
+                </div>
+              </div>
+              )}
+              {paymentInfo.is_paypal == '1' && (
+                <div className="payment-body-left-card-wrp">
+                <div className="payment-body-left-card">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name="payment"
+                      id="paypal"
+                      className="payment-type"
+                      value="paypal"
+                    />
+                    <label htmlFor="paypal">Paypal</label>
+                  </div>
+                  <div className="img">
+                    <img width="100" src="../../assets/images/paypal.png" alt="" />
+                  </div>
+                </div>
+                </div>
+              )}
               <button type="submit">Make Payment</button>
             </form>
           </div>
