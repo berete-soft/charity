@@ -9,6 +9,7 @@ import Profile1 from "./Profile/Profile1"
 import Profile2 from "./Profile/Profile2"
 import Profile3 from "./Profile/Profile3"
 import Profile4 from "./Profile/Profile4"
+import Profile5 from "./Profile/Profile5"
 
 
 export default function Profile() {
@@ -27,7 +28,11 @@ export default function Profile() {
         },
         {
             id: 2,
-            name: "Finance"
+            name: "Dues"
+        },
+        {
+            id: 5,
+            name: "Donation"
         },
         {
             id: 3,
@@ -53,7 +58,7 @@ export default function Profile() {
             Authorization: `Bearer ${token}`,
         }}).then(d=>{
             setUserData(d.data.response)
-        }).catch(e=> confirm.log(e.response))
+        }).catch(e=> console.log(e.response))
     },[])
 
     
@@ -98,6 +103,7 @@ export default function Profile() {
                             <div className="profile-body-right">
                                 {id=== 1 &&<Profile1 data={userData && userData.user} /> ||
                                  id===2 && <Profile2 data={userData && userData.finance} /> ||
+                                 id===5 && <Profile5 data={userData && userData.finance} /> ||
                                   id===3 && <Profile3 data={userData && userData.personal_info} /> ||
                                    id===4 && <Profile4 data={userData && userData.address}  />}
                                 
